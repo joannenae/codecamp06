@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   width: 1200px;
-  margin: 100px;
+  margin: 50px auto;
 `;
 
 export const CardWrapper = styled.div`
@@ -43,13 +43,9 @@ export const Info = styled.div`
   justify-content: center;
 `;
 
-export const Writer = styled.div`
+export const Writer = styled.div``;
 
-`;
-
-export const CreatedAt = styled.div`
-
-`;
+export const CreatedAt = styled.div``;
 
 export const Body = styled.div`
   width: 100%;
@@ -76,7 +72,8 @@ export const Button = styled.button`
   width: 179px;
   height: 45px;
   background-color: white;
-  border: 1px solid gray;
+  border: 1px solid lightgray;
+  border-radius: 5px;
   margin: 0px 12px;
   cursor: pointer;
 
