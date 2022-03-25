@@ -4,7 +4,7 @@ export default function BoardWrite(props){
     return(
         <S.Wr>
             <S.WrIn>
-                <S.Header>게시물 등록</S.Header>
+                <S.Header>{props.isEdit? "게시물 수정" : "게시물 등록"}</S.Header>
                 <S.TopBox>
                     <S.BoxIn>
                         <S.Text>작성자</S.Text>
@@ -51,7 +51,8 @@ export default function BoardWrite(props){
                 </S.ChooseBox>
                 <S.SignUp>
                     <S.Cancle>취소하기</S.Cancle>
-                    <S.Edit onClick={props.onClickSignUp}>등록하기</S.Edit>
+                    <S.Edit onClick={props.isEdit ? props.onClickUpdate : props.onClickSignUp}
+                        isActive={props.isEdit ? true : props.isActive}>{props.isEdit ? "수정하기" : "등록하기"}</S.Edit>
                 </S.SignUp>
             </S.WrIn>
         </S.Wr>

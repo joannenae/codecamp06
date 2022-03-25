@@ -1,7 +1,7 @@
 //수정하기 페이지
 
-import ProductWrite from "../../../../src/components/units/board/08-product-write/ProductWrite.container"
+import BoardWrite from "../../../../src/components/units/board/write/BoardWrite.container"
 
-export default function ProductEditPage(){
-    return <ProductWrite isEdit={true}/>
+export default function BoardsEditPage(){
+    return <BoardWrite isEdit={true}/>
 }

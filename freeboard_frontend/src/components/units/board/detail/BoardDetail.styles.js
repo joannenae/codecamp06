@@ -43,9 +43,13 @@ export const Info = styled.div`
   justify-content: center;
 `;
 
-export const Writer = styled.div``;
+export const Writer = styled.div`
 
-export const CreatedAt = styled.div``;
+`;
+
+export const CreatedAt = styled.div`
+
+`;
 
 export const Body = styled.div`
   width: 100%;
