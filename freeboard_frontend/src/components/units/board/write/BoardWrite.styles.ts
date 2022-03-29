@@ -30,6 +30,7 @@ export const Text = styled.p`
   color: black;
   font-weight: bold;
   font-size: 11px;
+  margin-top: 25px;
 `;
 export const Title = styled.div`
   margin-top: 30px;
@@ -116,6 +117,7 @@ export const Choose = styled.input``;
 export const TextChoose = styled.p`
   font-size: 11px;
   margin-right: 20px;
+  margin-top: none;
 `;
 export const SignUp = styled.div`
   width: 100%;

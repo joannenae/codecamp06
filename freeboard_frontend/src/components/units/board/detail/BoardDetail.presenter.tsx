@@ -27,6 +27,7 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
         <S.Button onClick={props.onClickMoveToBoardEdit}>수정하기</S.Button>
         <S.Button onClick={props.onClickDelete}>삭제하기</S.Button>
       </S.BottomWrapper>
-    </S.Wrapper>
+      {/* 댓글 */}
+    </S.Wrapper> //전체 박스
   );
 }
