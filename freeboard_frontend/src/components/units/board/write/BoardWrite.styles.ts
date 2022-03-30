@@ -16,6 +16,7 @@ export const Header = styled.div`
   text-align: center;
   font-weight: bold;
   padding: 30px;
+  font-size: 20px;
 `;
 export const TopBox = styled.div`
   display: flex;
@@ -57,7 +58,7 @@ export const Writer = styled.input`
   align-items: center;
   font-size: 11px;
   height: 30px;
-  margin-top: 20px;
+  margin-top: 5px;
   border-radius: 5px;
   border: 1px solid lightgray;
 `;
@@ -69,7 +70,7 @@ export const Content = styled.input`
   border: 1px solid lightgray;
 `;
 export const TextIn = styled.div`
-  height: 50px;
+  height: 30px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -95,6 +96,21 @@ export const Search = styled.button`
   border-radius: 5px;
   border: 1px solid lightgray;
 `;
+export const Label = styled.div`
+  font-size: 11px;
+  font-weight: bold;
+  padding-bottom: 10px;
+`;
+export const YoutubeBox = styled.div`
+  margin-top: 30px;
+`;
+export const Youtube = styled.input`
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  height: 30px;
+  font-size: 11px;
+`;
 export const ImageBox = styled.div`
   width: 50%;
   display: flex;
@@ -113,7 +129,10 @@ export const ChooseBox = styled.div`
   flex-direction: row;
   align-items: center;
 `;
-export const Choose = styled.input``;
+export const Choose = styled.input`
+  margin-bottom: 10px;
+  margin-right: 10px;
+`;
 export const TextChoose = styled.p`
   font-size: 11px;
   margin-right: 20px;

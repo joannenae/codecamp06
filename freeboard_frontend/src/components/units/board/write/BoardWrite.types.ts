@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardWriteProps {
   isEdit: boolean;
@@ -7,6 +8,7 @@ export interface IBoardWriteProps {
 export interface IUpdateBoardInput {
   title?: string;
   contents?: string;
+  youtubeUrl?: string;
 }
 
 export interface ISubmitButtonProps {
@@ -23,8 +25,15 @@ export interface IBoardWriteUIProps {
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeContent: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeYoutubeUrl: (event: ChangeEvent<HTMLInputElement>) => void;
   onClickSignUp: () => void;
   onClickUpdate: () => void;
+  showModal: () => void;
+  handleComplete: any;
+  handleCancel: any;
+  handleOk: any;
+  isOpen: any;
   isEdit: boolean;
-  data?: any;
+  data?: Pick<IQuery, "fetchBoard">;
+  address: string;
 }

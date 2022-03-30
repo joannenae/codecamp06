@@ -10,11 +10,15 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [isActive, setIsActive] = useState(false);
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [isOpen, setIsOpen] = useState(false);
+  const [address, setAddress] = useState("");
+  // const [data, setData] = useState("");
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
 
   const [nameError, setNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -69,6 +73,9 @@ export default function BoardWrite(props: IBoardWriteProps) {
       setIsActive(false);
     }
   };
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value);
+  };
 
   const onClickSignUp = async () => {
     if (name === "") {
@@ -92,6 +99,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
               password: password,
               title: title,
               contents: content,
+              youtubeUrl,
             },
           },
         });
@@ -104,10 +112,28 @@ export default function BoardWrite(props: IBoardWriteProps) {
       }
     }
   };
+  const showModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsOpen(false);
+  };
+
+  const handleComplete = (data: any) => {
+    setIsOpen(false);
+    console.log(data.address);
+    setAddress(data.address);
+  };
 
   const updateBoardInput: IUpdateBoardInput = {};
   if (title) updateBoardInput.title = title;
   if (content) updateBoardInput.contents = content;
+  if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
 
   const onClickUpdate = async () => {
     try {
@@ -129,20 +155,29 @@ export default function BoardWrite(props: IBoardWriteProps) {
   };
 
   return (
-    <BoardWriteUI
-      isActive={isActive}
-      nameError={nameError}
-      passwordError={passwordError}
-      titleError={titleError}
-      contentError={contentError}
-      onChangeName={onChangeName}
-      onChangePassword={onChangePassword}
-      onChangeTitle={onChangeTitle}
-      onChangeContent={onChangeContent}
-      onClickSignUp={onClickSignUp}
-      onClickUpdate={onClickUpdate}
-      isEdit={props.isEdit}
-      data={props.data}
-    />
+    <>
+      <BoardWriteUI
+        isActive={isActive}
+        nameError={nameError}
+        passwordError={passwordError}
+        titleError={titleError}
+        contentError={contentError}
+        onChangeName={onChangeName}
+        onChangePassword={onChangePassword}
+        onChangeTitle={onChangeTitle}
+        onChangeContent={onChangeContent}
+        onChangeYoutubeUrl={onChangeYoutubeUrl}
+        onClickSignUp={onClickSignUp}
+        onClickUpdate={onClickUpdate}
+        isEdit={props.isEdit}
+        data={props.data}
+        isOpen={isOpen}
+        showModal={showModal}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+        handleComplete={handleComplete}
+        address={address}
+      />
+    </>
   );
 }

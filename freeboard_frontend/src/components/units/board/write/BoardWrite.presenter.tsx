@@ -1,5 +1,7 @@
 import * as S from "./BoardWrite.styles";
 import { IBoardWriteUIProps } from "./BoardWrite.types";
+import { Modal } from "antd";
+import DaumPostcode from "react-daum-postcode";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
@@ -12,7 +14,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
             <S.Name
               type="text"
               onChange={props.onChangeName}
-              defaultValue={props.data?.fetchBoard.name}
+              defaultValue={props.data?.fetchBoard.writer}
               placeholder="이름을 입력해 주세요."
             />
             <S.Error>{props.nameError}</S.Error>
@@ -42,7 +44,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
             type="text"
             onChange={props.onChangeContent}
             placeholder="내용을 입력해주세요."
-            defaultValue={props.data?.fetchBoard.content}
+            defaultValue={props.data?.fetchBoard.contents}
           />
           <S.Error>{props.contentError}</S.Error>
         </S.Title>
@@ -50,11 +52,28 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
           <S.Text>주소</S.Text>
           <S.TextIn>
             <S.Address type="text" placeholder="07250"></S.Address>
-            <S.Search type="button">우편번호 검색</S.Search>
+            <S.Search onClick={props.showModal}>우편번호 검색</S.Search>
+            {props.isOpen && (
+              <Modal
+                visible={true}
+                onOk={props.handleOk}
+                onCancel={props.handleCancel}
+              >
+                <DaumPostcode onComplete={props.handleComplete} />
+              </Modal>
+            )}
           </S.TextIn>
         </S.BoxIn>
-        <S.Writer type="text" />
-        <S.Writer type="text" />
+        <S.Writer value={props.address} />
+        <S.Writer />
+        <S.YoutubeBox>
+          <S.Label>유튜브</S.Label>
+          <S.Youtube
+            placeholder="링크를 복사해주세요."
+            onChange={props.onChangeYoutubeUrl}
+            defaultValue={props.data?.fetchBoard.youtubeUrl || ""}
+          />
+        </S.YoutubeBox>
         <S.Text>사진첨부</S.Text>
         <S.ImageBox>
           <S.BoxOne></S.BoxOne>
@@ -63,9 +82,9 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
         </S.ImageBox>
         <S.Text>메인설정</S.Text>
         <S.ChooseBox>
-          <S.Choose type="radio" />
+          <S.Choose type="radio" name="gender" />
           <S.TextChoose>유튜브</S.TextChoose>
-          <S.Choose type="radio" />
+          <S.Choose type="radio" name="gender" />
           <S.TextChoose>사진</S.TextChoose>
         </S.ChooseBox>
         <S.SignUp>

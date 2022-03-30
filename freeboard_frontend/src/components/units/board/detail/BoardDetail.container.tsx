@@ -1,32 +1,32 @@
 import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
 import BoardDetailUI from "./BoardDetail.presenter";
-import { FETCH_BOARD } from "./BoardDetail.queries";
-import { DELETE_BOARD } from "./BoardDetail.queries";
-
+import { FETCH_BOARD, LIKE_BOARD, DISLIKE_BOARD } from "./BoardDetail.queries";
+import {
+  IMutation,
+  IMutationDislikeBoardArgs,
+  IMutationLikeBoardArgs,
+  IQuery,
+  IQueryFetchBoardArgs,
+} from "../../../../commons/types/generated/types";
+//----------------------------------------------------- 원래 gql에서 타입을 보고 다 지정을 해주었지만 이제는 아예 파일을 다운밥음 > 거기서 가져온것
 export default function BoardDetail() {
   const router = useRouter();
-  const [deleteBoard] = useMutation(DELETE_BOARD);
-  // const { data } = useQuery(FETCH_BOARD);
+  const [likeBoard] = useMutation<
+    Pick<IMutation, "likeBoard">,
+    IMutationLikeBoardArgs
+  >(LIKE_BOARD);
 
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: String(router.query.boardid) }, //폴더명
-  });
-  //event.target : 태그
-  const onClickDelete = () => {
-    // console.log(event.target.id)
-    try {
-      deleteBoard({
-        variables: { boardId: router.query.boardid }, //폴더명
-        refetchQueries: [{ query: FETCH_BOARD }],
-      });
-      alert("삭제되었습니다.");
-      router.push("/boards");
-    } catch (error) {
-      alert(error.message);
-      console.log("에러발생!!");
-    }
-  };
+  const [dislikeBoard] = useMutation<
+    Pick<IMutation, "dislikeBoard">,
+    IMutationDislikeBoardArgs
+  >(DISLIKE_BOARD);
+
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    { variables: { boardId: String(router.query.boardid) } }
+  );
+  //------------------------------------------------
 
   const onClickMoveToBoardList = () => {
     router.push("/boards");
@@ -35,13 +35,33 @@ export default function BoardDetail() {
   const onClickMoveToBoardEdit = () => {
     router.push(`/boards/${router.query.boardid}/edit`); //폴더명
   };
+  const onClickLike = () => {
+    likeBoard({
+      variables: { boardId: String(router.query.boardid) },
+      refetchQueries: [
+        { query: FETCH_BOARD, variables: { boardId: router.query.boardid } },
+      ],
+    });
+  };
+
+  const onClickDislike = () => {
+    dislikeBoard({
+      variables: { boardId: String(router.query.boardid) },
+      refetchQueries: [
+        { query: FETCH_BOARD, variables: { boardId: router.query.boardid } },
+      ],
+    });
+  };
+
+  //----------------------------------------------------------------
 
   return (
     <BoardDetailUI
       data={data}
       onClickMoveToBoardList={onClickMoveToBoardList}
       onClickMoveToBoardEdit={onClickMoveToBoardEdit}
-      onClickDelete={onClickDelete}
+      onClickLike={onClickLike}
+      onClickDislike={onClickDislike}
     />
   );
 }

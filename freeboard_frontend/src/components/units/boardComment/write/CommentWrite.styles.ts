@@ -47,6 +47,7 @@ export const CommentText = styled.textarea`
   border: none;
   border-bottom: 1px solid lightgray;
   border-radius: 5px;
+  resize: none;
 `;
 export const CommentBottom = styled.div`
   display: flex;
