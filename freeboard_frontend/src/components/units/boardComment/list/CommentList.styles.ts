@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Rate } from "antd";
 
+export const PasswordInput = styled.input``;
 export const Wrapper = styled.div`
   width: 1200px;
   margin: 0px auto;

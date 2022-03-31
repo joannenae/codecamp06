@@ -17,6 +17,7 @@ export default function CommentWriteUI(props: ICommentWriteUIProps) {
           <S.CommentPassword
             placeholder="비밀번호"
             onChange={props.onChangePassword}
+            type="password"
           />
           <S.Star onChange={props.handleChange} value={props.value} />
         </S.CommentInfo>

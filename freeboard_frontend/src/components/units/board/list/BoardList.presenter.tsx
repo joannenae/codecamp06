@@ -22,14 +22,14 @@ export default function BoardListUI(props: IBoardListUIProps) {
       <Wrapper>
         <TableTop />
         <RowTitle>
-          <ColumnHeader>ID</ColumnHeader>
+          <ColumnHeader>번호</ColumnHeader>
           <ColumnHeaderTitle>제목</ColumnHeaderTitle>
           <ColumnHeader>작성자</ColumnHeader>
           <ColumnHeader>날짜</ColumnHeader>
         </RowTitle>
-        {props.data?.fetchBoards.map((el: any) => (
+        {props.data?.fetchBoards.map((el, index: any) => (
           <Row key={el._id}>
-            <TdBasic>{String(el._id).slice(-4).toUpperCase()}</TdBasic>
+            <TdBasic>{props.data.fetchBoards.length - index}</TdBasic>
             <TdTitle id={el._id} onClick={props.onClickMoveToBoardDetail}>
               {el.title}
             </TdTitle>

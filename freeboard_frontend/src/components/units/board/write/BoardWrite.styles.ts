@@ -5,7 +5,7 @@ export const Wr = styled.div`
   width: 1200px;
   box-shadow: 5px 5px 5px 5px lightgray;
   margin: 40px auto;
-  height: 100%;
+  /* height: 100%; */
 `;
 export const WrIn = styled.div`
   width: 90%;
@@ -148,12 +148,11 @@ export const SignUp = styled.div`
   justify-content: center;
   text-align: center;
   line-height: 30px;
-  margin: 30px;
 `;
 export const Cancle = styled.div`
   width: 130px;
   background-color: gray;
-  margin-right: 50px;
+  margin-right: 30px;
   height: 30px;
   border-radius: 5px;
   color: white;
@@ -166,6 +165,7 @@ export const Edit = styled.button`
   border-radius: 5px;
   color: white;
   background-color: black;
+  margin-right: 30px;
 
   background-color: ${(props: ISubmitButtonProps) =>
     props.isActive ? "#ffd600" : "none"};
