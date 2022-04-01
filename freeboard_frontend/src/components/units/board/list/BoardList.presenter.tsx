@@ -1,4 +1,3 @@
-// import * as S from "./BoardList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 import { IBoardListUIProps } from "./BoardList.types";
 import {
@@ -14,7 +13,9 @@ import {
   Footer,
   Button,
   Pencil,
+  PencilBox,
 } from "./BoardList.styles";
+import Pagination from "../../../commons/layout/pagination/Pagination.Container";
 
 export default function BoardListUI(props: IBoardListUIProps) {
   return (
@@ -39,10 +40,12 @@ export default function BoardListUI(props: IBoardListUIProps) {
         ))}
         <TableBottom />
         <Footer>
-          <Button onClick={props.onClickMoveToBoardNew}>
-            <Pencil src="/write.png" />
-            게시물 등록
-          </Button>
+          <Pagination data={props.data} refetch={props.refetch} />
+          <PencilBox>
+            <Button onClick={props.onClickMoveToBoardNew}>
+              <Pencil src="/plus.png" />
+            </Button>
+          </PencilBox>
         </Footer>
       </Wrapper>
     </>

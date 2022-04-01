@@ -4,6 +4,7 @@ import { useMutation } from "@apollo/client";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { IBoardWriteProps, IUpdateBoardInput } from "./BoardWrite.types";
+import { Modal } from "antd";
 
 export default function BoardWrite(props: IBoardWriteProps) {
   const router = useRouter();
@@ -11,8 +12,9 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
   const [isOpen, setIsOpen] = useState(false);
+  const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
-  // const [data, setData] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -76,6 +78,19 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
     setYoutubeUrl(event.target.value);
   };
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
+
+  const onClickAddressSearch = () => {
+    setIsOpen(true);
+  };
+
+  const onCompleteAddressSearch = (data: any) => {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen(false);
+  };
 
   const onClickSignUp = async () => {
     if (name === "") {
@@ -97,18 +112,22 @@ export default function BoardWrite(props: IBoardWriteProps) {
             createBoardInput: {
               writer: name,
               password: password,
-              title: title,
+              title,
               contents: content,
               youtubeUrl,
+              boardAddress: {
+                zipcode,
+                address,
+                addressDetail,
+              },
             },
           },
         });
         console.log(result);
-        alert("게시물 등록에 성공하였습니다!");
-        alert("상세페이지로 가볼까요 ?");
+        Modal.success({ content: "게시물 등록에 성공하였습니다!" });
         router.push(`/boards/${result.data.createBoard._id}`);
       } catch (error) {
-        console.log(error.message);
+        Modal.error({ content: error.message });
       }
     }
   };
@@ -128,12 +147,20 @@ export default function BoardWrite(props: IBoardWriteProps) {
     setIsOpen(false);
     console.log(data.address);
     setAddress(data.address);
+    setZipcode(data.zonecode);
   };
 
   const updateBoardInput: IUpdateBoardInput = {};
   if (title) updateBoardInput.title = title;
   if (content) updateBoardInput.contents = content;
   if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
+  if (zipcode || address || addressDetail) {
+    updateBoardInput.boardAddress = {};
+    if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
+    if (address) updateBoardInput.boardAddress.address = address;
+    if (addressDetail)
+      updateBoardInput.boardAddress.addressDetail = addressDetail;
+  }
 
   const onClickUpdate = async () => {
     try {
@@ -147,10 +174,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
           },
         },
       });
-      alert("게시물 수정에 성공하였습니다!");
+      Modal.success({ content: "게시물 수정에 성공하였습니다!" });
       router.push(`/boards/${router.query.boardid}`);
     } catch (error) {
-      alert(error.message);
+      Modal.error({ content: error.message });
     }
   };
 
@@ -167,6 +194,9 @@ export default function BoardWrite(props: IBoardWriteProps) {
         onChangeTitle={onChangeTitle}
         onChangeContent={onChangeContent}
         onChangeYoutubeUrl={onChangeYoutubeUrl}
+        onChangeAddressDetail={onChangeAddressDetail}
+        onClickAddressSearch={onClickAddressSearch}
+        onCompleteAddressSearch={onCompleteAddressSearch}
         onClickSignUp={onClickSignUp}
         onClickUpdate={onClickUpdate}
         isEdit={props.isEdit}
@@ -177,6 +207,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
         handleCancel={handleCancel}
         handleComplete={handleComplete}
         address={address}
+        zipcode={zipcode}
+        addressDetail={addressDetail}
       />
     </>
   );

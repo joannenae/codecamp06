@@ -14,12 +14,14 @@ const Body = styled.div`
   height: 500px;
   margin-left: 20px;
   margin: 0 auto;
+  width: 50%;
 `;
 
 const LayoutSidebar = styled.div`
   height: 500px;
   width: 500px;
   background-color: skyblue;
+  border-bottom: 1px solid black;
 `;
 
 interface ILayoutProps {

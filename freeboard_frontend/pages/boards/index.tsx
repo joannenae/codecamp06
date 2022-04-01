@@ -1,5 +1,9 @@
-import BoardList from '../../src/components/units/board/list/BoardList.container'
+import BoardList from "../../src/components/units/board/list/BoardList.container";
 
-export default function BoardPage(){
-    return <BoardList />
+export default function BoardPage() {
+  return (
+    <>
+      <BoardList />
+    </>
+  );
 }

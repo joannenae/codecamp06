@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 
 const Wrapper = styled.div`
-  height: 50px;
-  background-color: orange;
-  width: 1920px;
+  height: 70px;
+  /* background-color: black; */
+  background-color: #f8efe8;
+  /* width: 1920px; */
 `;
 
 export default function LayoutNavigation() {
-  return <Wrapper>navigation</Wrapper>;
+  return <Wrapper></Wrapper>;
 }

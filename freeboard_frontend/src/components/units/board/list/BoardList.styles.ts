@@ -15,6 +15,9 @@ export const Row = styled.div`
   display: flex;
   height: 50px;
   align-items: center;
+  :hover {
+    color: #ffd600;
+  }
 `;
 export const RowTitle = styled.div`
   display: flex;
@@ -48,24 +51,26 @@ export const TdTitle = styled.div`
   }
 `;
 export const Footer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-top: 50px;
+  padding-top: 80px;
 `;
-export const Pencil = styled.img``;
+export const Pencil = styled.img`
+  width: 30px;
+  height: 30px;
+`;
 export const Button = styled.button`
-  width: 171px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   background-color: white;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  cursor: pointer;
+  border-radius: 50%;
+  margin-top: 20px;
 
+  cursor: pointer;
   :hover {
     background-color: #ffd600;
   }
+`;
+export const PencilBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 50px;
 `;

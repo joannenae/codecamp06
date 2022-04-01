@@ -14,7 +14,11 @@ const Body = styled.div`
   margin-left: 20px;
   margin: 0 auto;
   height: auto;
-  width: 1920px;
+  /* width: 1920px; */
+`;
+const WrapperOut = styled.div`
+  margin: 0 auto;
+  /* width: 1920px; */
 `;
 
 // const LayoutSidebar = styled.div`
@@ -32,9 +36,11 @@ export default function Layout(props: ILayoutProps) {
 
   return (
     <>
-      <LayoutHeader />
-      <LayoutBanner />
-      <LayoutNavigation />
+      <WrapperOut>
+        <LayoutHeader />
+        <LayoutBanner />
+        <LayoutNavigation />
+      </WrapperOut>
       <BodyWrapper>
         <Body>{props.children}</Body>
       </BodyWrapper>
