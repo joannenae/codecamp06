@@ -24,13 +24,13 @@ export default function MapBoardPage() {
   const [myIndex, setMyIndex] = useState(-1);
   const { data } = useQuery(FETCH_BOARDS);
 
-  const onClickEdit = (event) => {
+  const onClickEdit = (event: any) => {
     setMyIndex(Number(event.target.id));
   };
 
   return (
     <>
-      {data?.fetchBoards.map((el, index) => (
+      {data?.fetchBoards.map((el: any, index: any) => (
         <div key={el._id}>
           {index !== myIndex && (
             <MyRow key={el._id}>

@@ -4,39 +4,53 @@ import { ChangeEvent, useState } from "react";
 import {
   IMutation,
   IMutationCreateBoardCommentArgs,
+  IMutationUpdateBoardCommentArgs,
+  IUpdateBoardCommentInput,
 } from "../../../../commons/types/generated/types";
 import CommentWriteUI from "./CommentWrite.presenter";
 import { FETCH_BOARD_COMMENTS } from "../list/CommentList.queries";
-import { CREATE_BOARD_COMMENT } from "./CommentWrite.queries";
+import {
+  CREATE_BOARD_COMMENT,
+  UPDATE_BOARD_COMMENT,
+} from "./CommentWrite.queries";
+import { ICommentWriteProps } from "./CommentWrite.types";
 
-export default function CommentWrite() {
+export default function CommentWrite(props: ICommentWriteProps) {
   const router = useRouter();
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
   const [value, setValue] = useState(3);
+  const [star, setStar] = useState(0);
 
   const [createBoardComment] = useMutation<
     Pick<IMutation, "createBoardComment">,
     IMutationCreateBoardCommentArgs
   >(CREATE_BOARD_COMMENT);
+  const [updateBoardComment] = useMutation<
+    Pick<IMutation, "updateBoardComment">,
+    IMutationUpdateBoardCommentArgs
+  >(UPDATE_BOARD_COMMENT);
 
   const handleChange = (value: number) => {
     setValue(value);
   };
 
-  function onChangeWriter(event: ChangeEvent<HTMLInputElement>) {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
-  }
-  function onChangePassword(event: ChangeEvent<HTMLInputElement>) {
+  };
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-  }
-  function onChangeContents(event: ChangeEvent<HTMLTextAreaElement>) {
+  };
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
-  }
+  };
+  const onChangeStar = (value: number) => {
+    setStar(value);
+  };
 
-  async function onClickButton() {
+  const onClickButton = async () => {
     try {
       await createBoardComment({
         variables: {
@@ -44,7 +58,7 @@ export default function CommentWrite() {
             writer,
             password,
             contents,
-            rating: value,
+            rating: star,
           },
           boardId: String(router.query.boardid),
         },
@@ -58,7 +72,41 @@ export default function CommentWrite() {
     } catch (error) {
       alert(error.message);
     }
-  }
+  };
+  const onClickUpdate = async () => {
+    if (!contents) {
+      alert("내용이 수정되지 않았습니다.");
+      return;
+    }
+    if (!password) {
+      alert("비밀번호가 입력되지 않았습니다.");
+      return;
+    }
+
+    try {
+      if (!props.el?._id) return;
+      const updateBoardCommentInput: IUpdateBoardCommentInput = {};
+      if (contents) updateBoardCommentInput.contents = contents;
+      if (star !== props.el?.rating) updateBoardCommentInput.rating = star;
+
+      await updateBoardComment({
+        variables: {
+          updateBoardCommentInput,
+          password: password,
+          boardCommentId: props.el?._id,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENTS,
+            variables: { boardId: router.query.boardid },
+          },
+        ],
+      });
+      props.setIsEdit?.(false);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <CommentWriteUI
@@ -69,6 +117,9 @@ export default function CommentWrite() {
       contents={contents}
       handleChange={handleChange}
       value={value}
+      onClickUpdate={onClickUpdate}
+      isEdit={props.isEdit}
+      el={props.el}
     />
   );
 }

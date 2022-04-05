@@ -44,6 +44,9 @@ export const TdBasic = styled.div`
 export const TdTitle = styled.div`
   width: 70%;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   cursor: pointer;
 
   :hover {
@@ -56,6 +59,8 @@ export const Footer = styled.div`
 export const Pencil = styled.img`
   width: 30px;
   height: 30px;
+  -webkit-filter: opacity(0.3) drop-shadow(0 0 0 lightgray);
+  filter: opacity(0.3) drop-shadow(0 0 0 lightgray);
 `;
 export const Button = styled.button`
   width: 50px;
@@ -63,6 +68,7 @@ export const Button = styled.button`
   background-color: white;
   border-radius: 50%;
   margin-top: 20px;
+  border: none;
 
   cursor: pointer;
   :hover {

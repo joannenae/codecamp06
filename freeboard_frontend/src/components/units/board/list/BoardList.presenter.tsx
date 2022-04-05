@@ -1,4 +1,3 @@
-import { getDate } from "../../../../commons/libraries/utils";
 import { IBoardListUIProps } from "./BoardList.types";
 import {
   Wrapper,
@@ -16,8 +15,10 @@ import {
   PencilBox,
 } from "./BoardList.styles";
 import Pagination from "../../../commons/layout/pagination/Pagination.Container";
+import { getDate } from "../../../../commons/libraries/utils";
 
 export default function BoardListUI(props: IBoardListUIProps) {
+  console.log(props.data?.fetchBoards._id);
   return (
     <>
       <Wrapper>
@@ -40,7 +41,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
         ))}
         <TableBottom />
         <Footer>
-          <Pagination data={props.data} refetch={props.refetch} />
+          <Pagination refetch={props.refetch} count={props.count} />
           <PencilBox>
             <Button onClick={props.onClickMoveToBoardNew}>
               <Pencil src="/plus.png" />

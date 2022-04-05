@@ -20,7 +20,7 @@ const Img = styled.img`
 `;
 const Pbox = styled.div`
   /* width: 900px; */
-  height: 460px;
+  height: 500px;
 `;
 
 export default function LayoutBanner() {

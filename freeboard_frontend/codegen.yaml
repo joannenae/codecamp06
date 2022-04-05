@@ -1,0 +1,11 @@
+schema: http://backend06.codebootcamp.co.kr/graphql
+generates:
+  ./src/commons/types/generated/types.ts:
+    plugins:
+      - typescript
+    config:
+      typesPrefix: I
+
+    # schema 경로로 가서 타입을 가져와서 generates: 경로에 저장해준다. 파일이 없으면 만들어진다.
+    # 항상 인터넷이 연결되어있고, 백엔드 컴퓨터가 켜져있어야 한다!
+    # typesPrefix: I ㅌㅏ입 앞에 I를 붙인다.
