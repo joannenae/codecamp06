@@ -62,7 +62,7 @@ export default function CommentListUIItem(props: ICommentListUIItemProps) {
           <S.PasswordInput type="password" onChange={onChangeDeletePassword} />
         </Modal>
       )}
-      {isEdit && (
+      {!isEdit && (
         <S.Wrapper>
           <S.List>
             <S.ProfileImg src="/charic.png" />

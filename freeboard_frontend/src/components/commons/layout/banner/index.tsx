@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Wrapper = styled.div`
-  height: 500px;
+  height: 40vh;
   background-color: white;
   /* width: 1920px; */
   /* margin: 0 auto; */
@@ -16,11 +16,16 @@ const Div = styled.div`
   /* width: 1920px; */
 `;
 const Img = styled.img`
-  width: 1200px;
+  /* width: 1200px; */
+  height: 40vh;
+  object-fit: contain;
 `;
 const Pbox = styled.div`
-  /* width: 900px; */
-  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  width: 100%;
 `;
 
 export default function LayoutBanner() {
@@ -32,41 +37,29 @@ export default function LayoutBanner() {
     autoplay: true,
     speed: 3000,
     autoplaySpeed: 2000,
-    cssEase: "linear",
+    //  cssEase: "linear",
   };
   return (
     <Wrapper>
       <Div>
         <Slider {...settings}>
           <Pbox>
-            <h3>
-              <Img src="/11.jpeg" alt="" />
-            </h3>
+            <Img src="/11.jpeg" alt="" />
           </Pbox>
           <Pbox>
-            <h3>
-              <Img src="/12.jpeg" alt="" />
-            </h3>
+            <Img src="/12.jpeg" alt="" />
           </Pbox>
           <Pbox>
-            <h3>
-              <Img src="/13.jpeg" alt="" />
-            </h3>
+            <Img src="/13.jpeg" alt="" />
           </Pbox>
           <Pbox>
-            <h3>
-              <Img src="/14.jpeg" alt="" />
-            </h3>
+            <Img src="/14.jpeg" alt="" />
           </Pbox>
           <Pbox>
-            <h3>
-              <Img src="/15.jpeg" alt="" />
-            </h3>
+            <Img src="/15.jpeg" alt="" />
           </Pbox>
           <Pbox>
-            <h3>
-              <Img src="/16.jpeg" alt="" />
-            </h3>
+            <Img src="/16.jpeg" alt="" />
           </Pbox>
         </Slider>
       </Div>

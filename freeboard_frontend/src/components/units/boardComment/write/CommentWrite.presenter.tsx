@@ -13,20 +13,23 @@ export default function CommentWriteUI(props: ICommentWriteUIProps) {
         )}
         <S.CommentInfo>
           <S.CommentWriter
+            value={props.writer}
             placeholder="작성자"
             readOnly={!!props.el?.writer}
             defaultValue={props.el?.writer || ""}
             onChange={props.onChangeWriter}
           />
           <S.CommentPassword
+            value={props.password}
             placeholder="비밀번호"
             onChange={props.onChangePassword}
             type="password"
           />
-          <S.Star onChange={props.handleChange} value={props.value} />
+          <S.Star value={props.star} onChange={props.onChangeStar} />
         </S.CommentInfo>
         <S.CommentHere>
           <S.CommentText
+            value={props.contents}
             maxLength={100}
             defaultValue={props.el?.contents}
             onChange={props.onChangeContents}

@@ -5,11 +5,11 @@ import { ICommentListUIProps } from "./CommentList.types";
 export default function CommentListUI(props: ICommentListUIProps) {
   return (
     <>
-      <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true}>
-        {props.data?.fetchBoardComments.map((el) => (
-          <CommentListUIItem key={el._id} el={el} />
-        ))}
-      </InfiniteScroll>
+      {/* <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true}> */}
+      {props.data?.fetchBoardComments.map((el, index) => (
+        <CommentListUIItem key={index} el={el} />
+      ))}
+      {/* </InfiniteScroll> */}
     </>
   );
 }

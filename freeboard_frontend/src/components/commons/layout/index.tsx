@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import LayoutBanner from "./banner";
 import Layoutfooter from "./footer";
 import LayoutHeader from "./header";
-import LayoutNavigation from "./navigation";
+import LayoutNavigation from "./navigation/Navigation.container";
 
 const BodyWrapper = styled.div`
   display: flex;
@@ -21,10 +21,12 @@ const WrapperOut = styled.div`
   /* width: 1920px; */
 `;
 
-// const LayoutSidebar = styled.div`
-//   width: 500px;
-//   background-color: skyblue;
-// `;
+const HIDDEN_HEADERS = [
+  "/",
+  // ...
+  // ...
+  // ...
+];
 
 interface ILayoutProps {
   children: ReactNode;
@@ -33,18 +35,19 @@ interface ILayoutProps {
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
   console.log(router);
+  const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath); // asPath가 현재주소
 
   return (
     <>
       <WrapperOut>
-        <LayoutHeader />
-        <LayoutBanner />
-        <LayoutNavigation />
+        {!isHiddenHeader && <LayoutHeader />}
+        {!isHiddenHeader && <LayoutBanner />}
+        {!isHiddenHeader && <LayoutNavigation />}
       </WrapperOut>
       <BodyWrapper>
         <Body>{props.children}</Body>
       </BodyWrapper>
-      <Layoutfooter />
+      {!isHiddenHeader && <Layoutfooter />}
     </>
   );
 }

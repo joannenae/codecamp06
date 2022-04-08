@@ -11,14 +11,18 @@ export interface ICommentWriteUIProps {
   onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeStar: (value: number) => void;
   onClickButton: () => void;
-  handleChange: (value: number) => void;
+  // handleChange: (value: number) => void;
   onClickUpdate: () => void;
   value: any;
-  contents: string;
   isEdit?: boolean;
   setIsEdit?: any;
   el?: IBoardComment;
+  writer: string;
+  password: string;
+  contents: string;
+  star: number;
 }
 
 export interface IUpdateBoardCommentInput {

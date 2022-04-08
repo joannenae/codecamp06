@@ -33,10 +33,6 @@ export default function CommentWrite(props: ICommentWriteProps) {
     IMutationUpdateBoardCommentArgs
   >(UPDATE_BOARD_COMMENT);
 
-  const handleChange = (value: number) => {
-    setValue(value);
-  };
-
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
   };
@@ -69,6 +65,10 @@ export default function CommentWrite(props: ICommentWriteProps) {
           },
         ],
       });
+      setWriter("");
+      setPassword("");
+      setContents("");
+      setStar(0);
     } catch (error) {
       alert(error.message);
     }
@@ -103,6 +103,10 @@ export default function CommentWrite(props: ICommentWriteProps) {
         ],
       });
       props.setIsEdit?.(false);
+      // setWriter("");
+      // setPassword("");
+      // setContents("");
+      // setStar(0);
     } catch (error) {
       alert(error.message);
     }
@@ -113,13 +117,16 @@ export default function CommentWrite(props: ICommentWriteProps) {
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       onChangeContents={onChangeContents}
+      onChangeStar={onChangeStar}
       onClickButton={onClickButton}
-      contents={contents}
-      handleChange={handleChange}
       value={value}
       onClickUpdate={onClickUpdate}
       isEdit={props.isEdit}
       el={props.el}
+      writer={writer}
+      password={password}
+      contents={contents}
+      star={star}
     />
   );
 }

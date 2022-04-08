@@ -1,3 +1,4 @@
+import useRouter from "next/router";
 import styled from "@emotion/styled";
 
 const Logo = styled.div`
@@ -29,10 +30,14 @@ const Poly = styled.img`
 `;
 
 export default function LayoutHeader() {
+  const router = useRouter;
+  const onClickMove = () => {
+    router.push("/");
+  };
   return (
     <>
       <Logo>
-        <LogoImg src="/tamburins.jpg" alt="" />
+        <LogoImg src="/tamburins.jpg" alt="" onClick={onClickMove} />
         <Profile>
           <ProfileImg src="/charic.png" />
           <Poly src="/Polygon 1.png" />
