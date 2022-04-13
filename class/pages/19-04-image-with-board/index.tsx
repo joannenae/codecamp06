@@ -56,8 +56,8 @@ export default function GraphulMutationPage() {
         },
       },
     }); // graphql - api 방식
-    console.log(result);
-    console.log(result.data.createBoard.message);
+    // console.log(result);
+    // console.log(result.data.createBoard.message);
     console.log(data);
     setData(result.data.createBoard.message);
   };

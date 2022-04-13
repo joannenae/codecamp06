@@ -15,6 +15,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -90,6 +91,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
     setAddress(data.address);
     setZipcode(data.zonecode);
     setIsOpen(false);
+  };
+  const onChangeFileUrls = (fileUrl: string, index: number) => {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
   };
 
   const onClickSignUp = async () => {
@@ -197,6 +203,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
         onChangeAddressDetail={onChangeAddressDetail}
         onClickAddressSearch={onClickAddressSearch}
         onCompleteAddressSearch={onCompleteAddressSearch}
+        onChangeFileUrls={onChangeFileUrls}
         onClickSignUp={onClickSignUp}
         onClickUpdate={onClickUpdate}
         isEdit={props.isEdit}
@@ -209,6 +216,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
         address={address}
         zipcode={zipcode}
         addressDetail={addressDetail}
+        fileUrls={fileUrls}
       />
     </>
   );

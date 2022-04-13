@@ -2,6 +2,8 @@ import * as S from "./BoardWrite.styles";
 import { IBoardWriteUIProps } from "./BoardWrite.types";
 import { Modal } from "antd";
 import DaumPostcode from "react-daum-postcode";
+import { v4 as uuidv4 } from "uuid";
+import Upload from "../../../commons/upload/Upload.container";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
@@ -83,11 +85,14 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
           />
         </S.YoutubeBox>
         <S.Text>사진첨부</S.Text>
-        <S.ImageBox>
-          <S.BoxOne></S.BoxOne>
-          <S.BoxOne></S.BoxOne>
-          <S.BoxOne></S.BoxOne>
-        </S.ImageBox>
+        {props.fileUrls.map((el, index) => (
+          <Upload
+            key={uuidv4()}
+            index={index}
+            fileUrl={el}
+            onChangeFileUrls={props.onChangeFileUrls}
+          />
+        ))}
         <S.Text>메인설정</S.Text>
         <S.ChooseBox>
           <S.Choose type="radio" name="gender" />

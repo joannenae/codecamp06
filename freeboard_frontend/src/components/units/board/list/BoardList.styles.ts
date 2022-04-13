@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ITextTokenProps } from "./BoardList.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -79,4 +80,8 @@ export const PencilBox = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-bottom: 50px;
+`;
+
+export const TextToken = styled.span`
+  color: ${(props: ITextTokenProps) => (props.isMatched ? "#ffd600" : "black")};
 `;

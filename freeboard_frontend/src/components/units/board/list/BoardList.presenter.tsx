@@ -13,15 +13,22 @@ import {
   Button,
   Pencil,
   PencilBox,
+  TextToken,
 } from "./BoardList.styles";
 import Pagination from "../../../commons/layout/pagination/Pagination.Container";
 import { getDate } from "../../../../commons/libraries/utils";
+import Searchbar from "../../../commons/searchbar/Searchbar.container";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardListUI(props: IBoardListUIProps) {
-  console.log(props.data?.fetchBoards._id);
   return (
     <>
       <Wrapper>
+        <Searchbar
+          refetch={props.refetch}
+          refetchBoardsCount={props.refetchBoardsCount}
+          onChangeKeyword={props.onChangeKeyword}
+        />
         <TableTop />
         <RowTitle>
           <ColumnHeader>번호</ColumnHeader>
@@ -33,7 +40,14 @@ export default function BoardListUI(props: IBoardListUIProps) {
           <Row key={el._id}>
             <TdBasic>{props.data.fetchBoards.length - index}</TdBasic>
             <TdTitle id={el._id} onClick={props.onClickMoveToBoardDetail}>
-              {el.title}
+              {el.title
+                .replaceAll(props.keyword, `@#$%${props.keyword}@#$%`)
+                .split("@#$%")
+                .map((el) => (
+                  <TextToken key={uuidv4()} isMatched={props.keyword === el}>
+                    {el}
+                  </TextToken>
+                ))}
             </TdTitle>
             <TdBasic>{el.writer}</TdBasic>
             <TdBasic>{getDate(el.createdAt)}</TdBasic>
