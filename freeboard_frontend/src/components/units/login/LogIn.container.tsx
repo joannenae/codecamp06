@@ -1,8 +1,9 @@
+import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import LogInUI from "./LogIn.presenter";
-import { ILogInPageProps } from "./LogIn.types";
 
-export default function LogInPage(props: ILogInPageProps) {
+export default function LogInPage() {
+  const router = useRouter();
   const [isActive, setIsActive] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -13,7 +14,9 @@ export default function LogInPage(props: ILogInPageProps) {
 
   const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
-    if (event.target.value !== "") {
+    if (
+      event.target.value !== "/^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/"
+    ) {
       setEmailError("");
     }
 
@@ -25,7 +28,10 @@ export default function LogInPage(props: ILogInPageProps) {
   };
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    if (event.target.value !== "") {
+    if (
+      event.target.value !==
+      "/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/"
+    ) {
       setPasswordError("");
     }
 
@@ -38,14 +44,24 @@ export default function LogInPage(props: ILogInPageProps) {
 
   const onClickLogIn = async () => {
     if (email === "") {
-      setEmailError("이메일을 입력하세요");
+      setEmailError("올바르지 않은 이메일 형식입니다.");
     }
     if (password === "") {
-      setPasswordError("비밀번호를 입력하세요");
+      setPasswordError(
+        "영문, 숫자, 특수문자 혼합하여 8~20자리 이내의 비밀번호를 입력해주세요."
+      );
     }
-    if (email !== "" && password !== "") {
+    if (
+      email !== "/^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/" &&
+      password !==
+        "/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/"
+    ) {
     }
   };
+  const onClickToJoin = () => {
+    router.push(`/join`);
+  };
+
   return (
     <>
       <LogInUI
@@ -55,6 +71,7 @@ export default function LogInPage(props: ILogInPageProps) {
         onChangeEmail={onChangeEmail}
         onChangePassword={onChangePassword}
         onClickLogIn={onClickLogIn}
+        onClickToJoin={onClickToJoin}
       />
       ;
     </>

@@ -63,6 +63,7 @@ export const Join = styled.div`
   border-radius: 25px;
   border: 1px solid lightgray;
   font-size: 16px;
+  cursor: pointer;
 `;
 export const Find = styled.div`
   display: flex;

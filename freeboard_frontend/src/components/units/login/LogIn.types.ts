@@ -1,5 +1,4 @@
 import { ChangeEvent } from "react";
-export interface ILogInPageProps {}
 export interface ILogInUIProps {
   isActive: boolean;
   emailError: string;
@@ -7,4 +6,5 @@ export interface ILogInUIProps {
   onChangeEmail: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
   onClickLogIn: () => void;
+  onClickToJoin: () => void;
 }

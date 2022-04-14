@@ -23,7 +23,7 @@ export default function LogInUI(props: ILogInUIProps) {
           <S.LoginText>로그인 상태 유지</S.LoginText>
         </S.LoginCheck>
         <S.LoginSubmit onClick={props.onClickLogIn}>로그인</S.LoginSubmit>
-        <S.Join>화원가입</S.Join>
+        <S.Join onClick={props.onClickToJoin}>화원가입</S.Join>
         <S.Find>
           <S.FindEmail>이메일 찾기</S.FindEmail>
           <S.FindPassword>비밀번호 찾기</S.FindPassword>
