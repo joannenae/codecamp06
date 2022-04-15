@@ -16,7 +16,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
             <S.Name
               type="text"
               onChange={props.onChangeName}
-              defaultValue={props.data?.fetchBoard.writer}
+              defaultValue={props.data?.fetchBoard.writer} // 수정하기 전에 기본으로 써져있을 값 -> 등록할 때 썼던 데이터가 그대로 남아있어야댐
               placeholder="이름을 입력해 주세요."
             />
             <S.Error>{props.nameError}</S.Error>

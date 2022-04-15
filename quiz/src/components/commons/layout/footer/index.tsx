@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 const Wrapper = styled.div`
   height: 50px;
-  background-color: green;
+  background-color: black;
 `;
 
 export default function Layoutfooter() {

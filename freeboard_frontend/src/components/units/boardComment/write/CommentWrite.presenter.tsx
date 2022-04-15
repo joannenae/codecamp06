@@ -13,10 +13,10 @@ export default function CommentWriteUI(props: ICommentWriteUIProps) {
         )}
         <S.CommentInfo>
           <S.CommentWriter
-            value={props.writer}
+            value={props.writer} // 인풋 값 - 고정된 값 - 작성해도 안바뀜
             placeholder="작성자"
             readOnly={!!props.el?.writer}
-            defaultValue={props.el?.writer || ""}
+            defaultValue={props.el?.writer || ""} // 처음에만 이 값이고 그 다음엔 우리가 바꿀 수 있음
             onChange={props.onChangeWriter}
           />
           <S.CommentPassword

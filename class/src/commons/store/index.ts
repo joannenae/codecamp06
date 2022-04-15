@@ -9,3 +9,11 @@ export const accessTokenState = atom({
   key: "iaccessTokenState",
   default: "",
 });
+
+export const userInfoState = atom({
+  key: "userInfoState",
+  default: {
+    email: "",
+    name: "",
+  },
+});

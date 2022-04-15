@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Wrapper = styled.div`
   height: 500px;
-  background-color: lightpink;
+  background-color: white;
 `;
 const Div = styled.div`
   width: 600px;

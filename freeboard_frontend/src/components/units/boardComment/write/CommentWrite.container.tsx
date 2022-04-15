@@ -25,8 +25,8 @@ export default function CommentWrite(props: ICommentWriteProps) {
   const [star, setStar] = useState(0);
 
   const [createBoardComment] = useMutation<
-    Pick<IMutation, "createBoardComment">,
-    IMutationCreateBoardCommentArgs
+    Pick<IMutation, "createBoardComment">, // 내가 받는 데이터의 타입
+    IMutationCreateBoardCommentArgs // variables의 타입
   >(CREATE_BOARD_COMMENT);
   const [updateBoardComment] = useMutation<
     Pick<IMutation, "updateBoardComment">,
@@ -60,7 +60,7 @@ export default function CommentWrite(props: ICommentWriteProps) {
         },
         refetchQueries: [
           {
-            query: FETCH_BOARD_COMMENTS,
+            query: FETCH_BOARD_COMMENTS, // 댓글 목록
             variables: { boardId: router.query.boardid },
           },
         ],

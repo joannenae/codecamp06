@@ -13,3 +13,4 @@ export default function BoardDetailPage() {
     </div>
   );
 }
+// 상세보기 페이지

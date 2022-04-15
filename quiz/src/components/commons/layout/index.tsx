@@ -19,8 +19,8 @@ const Body = styled.div`
 
 const LayoutSidebar = styled.div`
   height: 500px;
-  width: 500px;
-  background-color: skyblue;
+  width: 200px;
+  background-color: gray;
   border-bottom: 1px solid black;
 `;
 

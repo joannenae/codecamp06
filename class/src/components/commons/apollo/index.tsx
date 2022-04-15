@@ -1,6 +1,6 @@
 import { createUploadLink } from "apollo-upload-client";
 import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../../commons/store";
+import { accessTokenState, userInfoState } from "../../../commons/store";
 import {
   ApolloClient,
   ApolloLink,
@@ -11,21 +11,24 @@ import { useEffect } from "react";
 
 export default function ApolloSetting(props) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [, setUserInfo] = useRecoilState(userInfoState);
   // 1. --------------------------더 이상 지원 안됨
   // if (process.browser) {
   // } else {
   // }
   // 2. ----------------------------두번 째 방법
-  if (typeof window === "undefined") {
+  if (typeof window !== "undefined") {
     console.log("여기는 브라우저");
   } else {
     console.log("여기는 프론트엔드 서버");
   }
   // 3.------------------------------세번 째 방법
   useEffect(() => {
-    const mylocalstorageAccessToken = localStorage.getItem("accessToken");
-    setAccessToken(mylocalstorageAccessToken || "");
-  });
+    const AccessToken = localStorage.getItem("accessToken"); // 로컬스토리지에서 정보 뽑아서
+    const userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}"); // userInfo가 있으면 userInfo문자열을 객체로 바꿔주고 없으면 빈 객체가 들어있는 문자열을 객체로 바꿔줘.
+    setAccessToken(AccessToken || ""); // 글로벌 스테이트에 저장해주기
+    setUserInfo(userInfo);
+  }, []);
   // --------------------------프리렌더링시 문제 되는 코드
   // const mylocalstorageAccessToken = localStorage.getItem("accessToken");
   // setAccessToken(mylocalstorageAccessToken || "");

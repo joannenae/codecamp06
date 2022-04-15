@@ -174,9 +174,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
         variables: {
           boardId: router.query.boardid,
           password: password,
+          // 검증에 이용되는 용도
           updateBoardInput: {
             title: title,
             contents: content,
+            // 위 검증이 맞다면 이 내용들을 수정해줘 - playground
           },
         },
       });
