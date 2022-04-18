@@ -17,3 +17,7 @@ export const userInfoState = atom({
     name: "",
   },
 });
+export const visitedPageState = atom({
+  key: "visitedPageState",
+  default: "/",
+});

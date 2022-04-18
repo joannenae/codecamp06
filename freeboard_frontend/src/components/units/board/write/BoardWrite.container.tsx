@@ -119,6 +119,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
               writer: name,
               password: password,
               title,
+              images: fileUrls,
               contents: content,
               youtubeUrl,
               boardAddress: {

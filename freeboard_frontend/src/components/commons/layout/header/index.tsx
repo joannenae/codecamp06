@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 const Logo = styled.div`
   height: 120px;
   background-color: #f8efe8;
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   z-index: 2;
 `;

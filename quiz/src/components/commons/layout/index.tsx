@@ -11,14 +11,14 @@ const BodyWrapper = styled.div`
 `;
 
 const Body = styled.div`
-  height: 500px;
+  /* height: 500px; */
   margin-left: 20px;
   margin: 0 auto;
   width: 50%;
 `;
 
 const LayoutSidebar = styled.div`
-  height: 500px;
+  /* height: 500px; */
   width: 200px;
   background-color: gray;
   border-bottom: 1px solid black;

@@ -1,10 +1,12 @@
 import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import JoinUI from "./Join.presenter";
 import { CREATE_USER } from "./Join.queries";
 
 export default function JoinPage() {
   const [isActive, setIsActive] = useState(false);
+  const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -124,6 +126,7 @@ export default function JoinPage() {
         });
         console.log(result);
         alert("회원가입에 성공하였습니다!");
+        router.push("/login");
       } catch (error) {
         alert("회원가입에 실패하였습니다.");
       }

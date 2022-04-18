@@ -35,10 +35,10 @@ export default function LoginPage() {
     });
     const accessToken = result.data.loginUser.accessToken;
     setAccessToken(accessToken); // 글로벌스테이트
-    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("accessToken", accessToken); // accessToken 이 보이는지
     console.log(accessToken);
     alert("로그인 되었습니다");
-    router.push("/23-02-login-localstorage-success");
+    router.push("/23-02-login-localstorage-success"); // 자동으로 페이지가 이동이 되는지
   };
 
   return (
