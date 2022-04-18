@@ -14,7 +14,6 @@ export const Nav = styled.div`
   width: 200px;
   font-size: 18px;
   text-align: center;
-  font-weight: bold;
   /* border-right: 2px solid gray; */
   color: gray;
 `;

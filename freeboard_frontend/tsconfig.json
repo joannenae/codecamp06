@@ -19,7 +19,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/commons/libraries/utils.js"
+    "src/commons/libraries/utils.js",
+    "pages/index.tsx"
   ],
   "exclude": ["node_modules"]
 }

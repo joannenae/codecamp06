@@ -65,7 +65,7 @@ export default function LoginPage() {
     setAccessToken(accessToken);
     setUserInfo(userInfo);
     localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("userInfo", JSON.stringify(userInfo)); // 문자열로 바꿔주기
+    localStorage.setItem("userInfo", JSON.stringify(userInfo)); // usesrInfo가 객체이기 때문에 문자열로 바꿔주기
 
     // 4. 로그인 성공페이지로 이동하기
     alert("로그인 되었습니다");

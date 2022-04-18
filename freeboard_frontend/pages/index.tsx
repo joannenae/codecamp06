@@ -1,5 +1,5 @@
-import useRouter from "next/router";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 
 const Wrapper = styled.div`
   position: relative;
@@ -9,22 +9,21 @@ const My = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   color: white;
   right: 0;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 300;
-  margin-top: 20px;
-  margin-right: 20px;
+  position: absolute;
 `;
 const MyPage = styled.span`
   margin-right: 30px;
   cursor: pointer;
 `;
-const LogIn = styled.span`
+const LogIn = styled.div`
   padding: 30px;
   margin-right: 30px;
   cursor: pointer;
+  z-index: 2;
 `;
 
 const DivBox = styled.div`
@@ -73,8 +72,13 @@ const Button = styled.div`
     color: white;
   }
 `;
+
 export default function Home() {
-  const router = useRouter;
+  const router = useRouter();
+  const onClickLog = () => {
+    router.push("/login");
+    console.log("여기");
+  };
   const onClickMove = () => {
     router.push("/boards");
   };
@@ -84,7 +88,7 @@ export default function Home() {
       <Wrapper>
         <My>
           <MyPage>마이페이지</MyPage>
-          <LogIn>로그인</LogIn>
+          <LogIn onClick={onClickLog}>로그인</LogIn>
         </My>
         <DivBox>
           <Img src="/main.webp"></Img>

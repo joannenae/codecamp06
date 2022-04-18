@@ -83,5 +83,5 @@ export const PencilBox = styled.div`
 `;
 
 export const TextToken = styled.span`
-  color: ${(props: ITextTokenProps) => (props.isMatched ? "#ffd600" : "black")};
+  color: ${(props: ITextTokenProps) => (props.isMatched ? "#ffd600" : "none")};
 `;

@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 export const Span = styled.button`
   width 100%;
+  border:none;
 `;
 interface IPageProps {
   isCurrent?: boolean;
@@ -17,4 +18,5 @@ export const SpanBox = styled.div`
 `;
 export const Pages = styled.span`
   color: ${(props: IPageProps) => (props.isCurrent ? "orange" : "black")};
+  font-weight: normal;
 `;

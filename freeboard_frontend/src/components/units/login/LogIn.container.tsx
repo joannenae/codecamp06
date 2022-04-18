@@ -1,9 +1,12 @@
+import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import LogInUI from "./LogIn.presenter";
+import { LOGIN_USER } from "./LogIn.queries";
 
 export default function LogInPage() {
   const router = useRouter();
+  const [loginUser] = useMutation(LOGIN_USER);
   const [isActive, setIsActive] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -15,7 +18,9 @@ export default function LogInPage() {
   const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
     if (
-      event.target.value !== "/^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/"
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test(
+        event.target.value
+      )
     ) {
       setEmailError("");
     }
@@ -29,8 +34,9 @@ export default function LogInPage() {
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
     if (
-      event.target.value !==
-      "/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/"
+      /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/.test(
+        event.target.value
+      )
     ) {
       setPasswordError("");
     }
@@ -43,21 +49,52 @@ export default function LogInPage() {
   };
 
   const onClickLogIn = async () => {
-    if (email === "") {
+    if (
+      !/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test(
+        email
+      )
+    ) {
       setEmailError("올바르지 않은 이메일 형식입니다.");
+    } else {
+      setEmailError("");
     }
-    if (password === "") {
+    if (
+      !/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/.test(
+        password
+      )
+      // 최소 8 자, 최소 하나의 문자, 하나의 숫자 및 하나의 특수 문자
+    ) {
       setPasswordError(
         "영문, 숫자, 특수문자 혼합하여 8~20자리 이내의 비밀번호를 입력해주세요."
       );
+    } else {
+      setPassword("");
     }
     if (
-      email !== "/^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/" &&
-      password !==
-        "/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/"
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test(
+        email
+      ) &&
+      /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/.test(
+        password
+      )
     ) {
+      try {
+        const result = await loginUser({
+          variables: {
+            email,
+            password,
+          },
+        });
+        const accessToken = result.data.loginUser.accessToken;
+        console.log(accessToken);
+        alert("로그인에 성공하였습니다.");
+        router.push("/");
+      } catch (error) {
+        alert("로그인에 실패하였습니다.");
+      }
     }
   };
+
   const onClickToJoin = () => {
     router.push(`/join`);
   };

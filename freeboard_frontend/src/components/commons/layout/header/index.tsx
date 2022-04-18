@@ -3,9 +3,10 @@ import styled from "@emotion/styled";
 
 const Logo = styled.div`
   height: 120px;
-  /* background-color: #98a0fb; */
   background-color: #f8efe8;
-  /* width: 1920px; */
+  position: fixed;
+  width: 100%;
+  z-index: 2;
 `;
 const LogoImg = styled.img`
   width: 300px;
