@@ -10,9 +10,9 @@ const MyColumn = styled.div`
 `;
 
 export default function MapBoardPage() {
-  const [basketItems, setBasketItems] = useState([]);
+  const [basketItems, setBasketItems] = useState([]); // map 으로 뿌리기
 
-  // useEffect 를 쓰지 않으면 localstorage에서 몾찾음
+  // useEffect 를 쓰지 않으면 localstorage에서 몾찾음 - 장바구니에 담긴 목록보기
   useEffect(() => {
     const baskets = JSON.parse(localStorage.getItem("baskets") || "[]");
     setBasketItems(baskets);

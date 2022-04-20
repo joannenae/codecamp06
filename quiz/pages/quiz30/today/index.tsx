@@ -74,7 +74,7 @@ export default function QuizTodayPage() {
     const today = getDate();
     const baskets = JSON.parse(localStorage.getItem(today) || "[]");
     setTodayItems(baskets);
-  }, [changeToday]);
+  }, [changeToday]); // useEffect에서 함수 뒤에 ,[]이 있으면  렌더링 된 후 단 한 번만 실행되고 다시 실해되기 않는다 그러나 []안에 지정해주면 지정된 변수의 값이 변했을 때만 실행하게 된다.
 
   return (
     <Wrapper>
