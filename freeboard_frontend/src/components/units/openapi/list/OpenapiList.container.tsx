@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { withAuth } from "../../../commons/hocs/withAuth";
 import OpenapiListUI from "./OpenapiList.presenter";
 
-export default function OpenapiList() {
+function OpenapiList() {
   const [imgUrls, setImgUrls] = useState<string[]>([]);
 
   useEffect(() => {
@@ -19,3 +20,5 @@ export default function OpenapiList() {
 
   return <OpenapiListUI imgUrls={imgUrls} />;
 }
+
+export default withAuth(OpenapiList);

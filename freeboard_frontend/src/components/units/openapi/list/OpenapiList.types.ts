@@ -1,3 +1,4 @@
 export interface IOpenapiListUIProps {
-  imgUrls: string[];
+  // imgUrls: string[];
+  imgUrls: any;
 }
