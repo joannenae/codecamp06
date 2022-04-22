@@ -6,7 +6,7 @@ export const isEditState = atom({
   default: false,
 });
 export const accessTokenState = atom({
-  key: "iaccessTokenState",
+  key: "accessTokenState",
   default: "",
 });
 

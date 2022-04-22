@@ -1,13 +1,16 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../commons/store";
 import LogInUI from "./LogIn.presenter";
 import { LOGIN_USER } from "./LogIn.queries";
 
 export default function LogInPage() {
   const router = useRouter();
-  const [loginUser] = useMutation(LOGIN_USER);
   const [isActive, setIsActive] = useState(false);
+  const [loginUser] = useMutation(LOGIN_USER);
+  const [, setAccessToken] = useRecoilState(accessTokenState);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -86,7 +89,8 @@ export default function LogInPage() {
           },
         });
         const accessToken = result.data.loginUser.accessToken;
-        console.log(accessToken);
+        setAccessToken(accessToken);
+        localStorage.setItem("accessToken", accessToken);
         alert("로그인에 성공하였습니다.");
         router.push("/");
       } catch (error) {
