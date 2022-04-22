@@ -18,7 +18,9 @@ export default function ProductDetail() {
   });
 
   const onClickMoveList = () => {};
-  const onClickMoveEdit = () => {};
+  const onClickMoveEdit = () => {
+    router.push(`/market/${router.query.marketid}/edit`);
+  };
 
   return (
     <ProductDetailUI

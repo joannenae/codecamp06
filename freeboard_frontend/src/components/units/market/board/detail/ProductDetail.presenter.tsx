@@ -10,7 +10,7 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
           <S.AvatarWrapper>
             <S.Avatar src="/charic.png" />
             <S.Info>
-              <S.Writer>{props.data?.fetchUseditem?.writer}</S.Writer>
+              <S.Writer>{props.data?.fetchUseditem?.name}</S.Writer>
               <S.CreatedAt>
                 {getDate(props.data?.fetchUseditem?.createdAt)}
               </S.CreatedAt>
@@ -20,7 +20,7 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
         <S.Body>
           <S.Title>{props.data?.fetchUseditem?.title}</S.Title>
           <S.ImageWrapper>
-            {props.data?.fetchBoard.images
+            {props.data?.fetchUseditem.images
               ?.filter((el: string) => el)
               .map((el: string) => (
                 <S.Image

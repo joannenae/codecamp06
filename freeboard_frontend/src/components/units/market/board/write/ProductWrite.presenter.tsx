@@ -45,7 +45,7 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
           <S.TitlePrice>
             <S.Text>판매 가격</S.Text>
             <S.Price
-              type="text"
+              type="number"
               onChange={props.onChangePrice}
               placeholder="판매 가격을 입력해주세요."
               defaultValue={props.data?.fetchUseditem.price}

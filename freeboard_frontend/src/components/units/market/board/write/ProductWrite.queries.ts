@@ -1,13 +1,15 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_USED_ITEM = gql`
-  mutation createUsedItem($createUseditemInput: CreateUseditemInput!) {
-    createBoard(createUseditemInput: $CreateUseditemInput) {
+  mutation createUseditem($createUseditemInput: CreateUseditemInput!) {
+    createUseditem(createUseditemInput: $createUseditemInput) {
+      _id
       name
       contents
       price
       tags
       remarks
+      images
     }
   }
 `;

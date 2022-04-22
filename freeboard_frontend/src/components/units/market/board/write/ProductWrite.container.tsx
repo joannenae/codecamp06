@@ -12,13 +12,13 @@ export default function ProductWrite(props: IProductWriteProps) {
   const [, setAccessToken] = useRecoilState(accessTokenState);
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
-  const [createUsedItem] = useMutation(CREATE_USED_ITEM);
+  const [createUseditem] = useMutation(CREATE_USED_ITEM);
   const [updateUsedItem] = useMutation(UPDATE_USED_ITEM);
 
   const [name, setName] = useState("");
   const [remarks, setRemarks] = useState("");
   const [contents, setContents] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [tags, setTags] = useState("");
 
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
@@ -63,7 +63,7 @@ export default function ProductWrite(props: IProductWriteProps) {
     }
   };
   const onChangePrice = (event: ChangeEvent<HTMLInputElement>) => {
-    setPrice(event.target.value);
+    setPrice(Number(event.target.value));
     if (event.target.value !== "") {
       setPriceError("");
     }
@@ -101,7 +101,7 @@ export default function ProductWrite(props: IProductWriteProps) {
     if (contents === "") {
       setContentError("내용을 입력해주세요.");
     }
-    if (price === "") {
+    if (price === 0) {
       setPriceError("가격을 입력해주세요.");
     }
     if (tags === "") {
@@ -111,26 +111,29 @@ export default function ProductWrite(props: IProductWriteProps) {
       name !== "" &&
       remarks !== "" &&
       contents !== "" &&
-      price !== "" &&
+      price !== 0 &&
       tags !== ""
-    ) {
+    )
+      console.log(name);
+    {
       try {
-        const result = await createUsedItem({
+        const result = await createUseditem({
           variables: {
             createUseditemInput: {
-              name,
-              remarks,
-              contents,
+              name: name,
+              remarks: remarks,
+              contents: contents,
               price,
               tags,
               images: fileUrls,
             },
           },
         });
-        const accessToken = result.data.loginUser.accessToken;
-        setAccessToken(accessToken); // 글로벌스테이트
-        localStorage.setItem("accessToken", accessToken); // accessToken 이 보이는지
+        // const accessToken = result.data.loginUser.accessToken;
+        // setAccessToken(accessToken); // 글로벌스테이트
+        // localStorage.setItem("accessToken", accessToken); // accessToken 이 보이는지
         Modal.success({ content: "상품이 등록되었습니다." });
+        console.log(result);
         router.push(`/market/${result.data.createUseditem._id}`);
       } catch (error) {
         Modal.error({ content: error.message });
@@ -147,7 +150,6 @@ export default function ProductWrite(props: IProductWriteProps) {
       await updateUsedItem({
         variables: {
           useditemId: router.query.marketid,
-
           // 검증에 이용되는 용도
           updateUseditemInput: {
             name,

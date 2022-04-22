@@ -2,5 +2,5 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.ignoreWords": ["dompurify", "newdate"],
-  "cSpell.words": ["inicis", "marketid", "useditem"]
+  "cSpell.words": ["dapi", "inicis", "kakao", "marketid", "useditem"]
 }
