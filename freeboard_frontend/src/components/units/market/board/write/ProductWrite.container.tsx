@@ -162,7 +162,7 @@ export default function ProductWrite(props: IProductWriteProps) {
           },
         },
       });
-      Modal.success({ content: "게시물 수정에 성공하였습니다!" });
+      Modal.success({ content: "상품 수정에 성공하였습니다!" });
       router.push(`/market/${router.query.marketid}`);
     } catch (error) {
       Modal.error({ content: error.message });
