@@ -3,6 +3,10 @@ import { IProductWriteUIProps } from "./ProductWrite.types";
 import { Modal } from "antd";
 import { v4 as uuidv4 } from "uuid";
 import Upload from "../../../../commons/upload/Upload.container";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function ProductWriteUI(props: IProductWriteUIProps) {
   return (
@@ -33,10 +37,8 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
         </S.Title>
         <S.Title>
           <S.Text>내용</S.Text>
-          <S.Content
-            type="text"
+          <ReactQuill
             onChange={props.onChangeContent}
-            placeholder="내용을 입력해주세요."
             defaultValue={props.data?.fetchUseditem.contents}
           />
           <S.Error>{props.contentError}</S.Error>

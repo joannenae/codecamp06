@@ -25,7 +25,7 @@ export interface IProductWriteUIProps {
 
   onChangeName: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeRemark: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeContent: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeContent: () => string;
   onChangePrice: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeTag: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeFileUrls: (fileUrls: string, index: number) => void;
