@@ -2,5 +2,12 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.ignoreWords": ["dompurify", "newdate"],
-  "cSpell.words": ["dapi", "inicis", "kakao", "marketid", "useditem"]
+  "cSpell.words": [
+    "dapi",
+    "fetchUseditems",
+    "inicis",
+    "kakao",
+    "marketid",
+    "useditem"
+  ]
 }

@@ -14,13 +14,20 @@ export const CREATE_USED_ITEM = gql`
   }
 `;
 export const UPDATE_USED_ITEM = gql`
-  mutation updateUsedItem(
+  mutation updateUseditem(
     $updateUseditemInput: UpdateUseditemInput!
     $useditemId: ID!
   ) {
     updateUseditem(
-      updateUseditemInput: $UpdateUseditemInput
+      updateUseditemInput: $updateUseditemInput
       useditemId: $useditemId
-    )
+    ) {
+      _id
+      contents
+      price
+      tags
+      remarks
+      images
+    }
   }
 `;

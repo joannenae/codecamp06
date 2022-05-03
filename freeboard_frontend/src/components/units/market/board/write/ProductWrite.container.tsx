@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { accessTokenState } from "../../../../../../src/commons/store";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import ProductWriteUI from "./ProductWrite.presenter";
 import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "./ProductWrite.queries";
@@ -15,6 +15,13 @@ export default function ProductWrite(props: IProductWriteProps) {
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
   const [updateUsedItem] = useMutation(UPDATE_USED_ITEM);
 
+  // const [isAddress, setIsAddress] = useState({
+  //   zipcode: "",
+  //   address: "",
+  //   addressDetail: "",
+  //   lat: 0,
+  //   lng: 0,
+  // });
   const [name, setName] = useState("");
   const [remarks, setRemarks] = useState("");
   const [contents, setContents] = useState("");
@@ -51,12 +58,13 @@ export default function ProductWrite(props: IProductWriteProps) {
       setIsActive(false);
     }
   };
-  const onChangeContent = (event: ChangeEvent<HTMLInputElement>) => {
-    setContents(event.target.value);
-    if (event.target.value !== "") {
+  const onChangeContent = (value: string) => {
+    console.log(value);
+    setContents(value === "<p><br></p>" ? "" : value);
+    if (value !== "") {
       setContentError("");
     }
-    if (name && remarks && event.target.value && price && tags) {
+    if (name && remarks && value && price && tags) {
       setIsActive(true);
     } else {
       setIsActive(false);
@@ -90,6 +98,14 @@ export default function ProductWrite(props: IProductWriteProps) {
     newFileUrls[index] = fileUrl;
     setFileUrls(newFileUrls);
   };
+  // const onChangeAddress = (
+  //   event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  // ) => {
+  //   setIsAddress({
+  //     ...isAddress,
+  //     [event.target.id]: event.target.value,
+  //   });
+  // };
 
   const onClickSignUp = async () => {
     if (name === "") {
@@ -129,9 +145,6 @@ export default function ProductWrite(props: IProductWriteProps) {
             },
           },
         });
-        // const accessToken = result.data.loginUser.accessToken;
-        // setAccessToken(accessToken); // 글로벌스테이트
-        // localStorage.setItem("accessToken", accessToken); // accessToken 이 보이는지
         Modal.success({ content: "상품이 등록되었습니다." });
         console.log(result);
         router.push(`/market/${result.data.createUseditem._id}`);
@@ -141,11 +154,16 @@ export default function ProductWrite(props: IProductWriteProps) {
     }
   };
 
-  const updateUseditemInput: IUpdateUseditemInput = {};
-  if (name) updateUseditemInput.name = name;
-  if (contents) updateUseditemInput.contents = contents;
-
   const onClickUpdate = async () => {
+    const currentFiles = JSON.stringify(fileUrls);
+    const defaultFiles = JSON.stringify(props.data.fetchUseditem.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
+
+    const updateUseditemInput: IUpdateUseditemInput = {};
+    if (name) updateUseditemInput.name = name;
+    if (contents) updateUseditemInput.contents = contents;
+    if (isChangedFiles) updateUseditemInput.images = fileUrls;
+
     try {
       await updateUsedItem({
         variables: {
@@ -157,7 +175,7 @@ export default function ProductWrite(props: IProductWriteProps) {
             remarks,
             price,
             tags,
-            images: fileUrls,
+            // images: fileUrls,
             // 위 검증이 맞다면 이 내용들을 수정해줘 - playground
           },
         },
@@ -168,6 +186,12 @@ export default function ProductWrite(props: IProductWriteProps) {
       Modal.error({ content: error.message });
     }
   };
+
+  useEffect(() => {
+    if (props.data?.fetchUseditem.images?.length) {
+      setFileUrls([...props.data?.fetchUseditem.images]);
+    }
+  }, [props.data]);
 
   return (
     <>
@@ -189,6 +213,9 @@ export default function ProductWrite(props: IProductWriteProps) {
         onClickSignUp={onClickSignUp}
         onClickUpdate={onClickUpdate}
         fileUrls={fileUrls}
+        // isAddress={isAddress}
+        // setIsAddress={setIsAddress}
+        // onChangeAddress={onChangeAddress}
       />
     </>
   );

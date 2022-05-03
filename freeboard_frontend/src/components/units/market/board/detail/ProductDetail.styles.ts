@@ -17,7 +17,7 @@ export const CardWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   border: none;
-  box-shadow: 0px 0px 10px gray;
+  /* box-shadow: 0px 0px 10px gray; */
 `;
 
 export const Header = styled.div`
@@ -68,6 +68,7 @@ export const Image = styled.img`
 export const Contents = styled.div`
   padding-top: 40px;
   padding-bottom: 120px;
+  border-bottom: 1px solid lightgray;
 `;
 
 export const IconWrapper = styled.div`
@@ -109,7 +110,7 @@ export const BottomWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-top: 80px;
+  padding-top: 50px;
 `;
 
 export const Button = styled.button`
@@ -125,7 +126,4 @@ export const Button = styled.button`
     background-color: gold;
     border-color: white;
   }
-`;
-export const Youtube = styled(ReactPlayer)`
-  margin: auto;
 `;

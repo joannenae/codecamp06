@@ -1,6 +1,8 @@
 import * as S from "./ProductDetail.styles";
 import { getDate } from "../../../../../commons/libraries/utils";
 import { IProductDetailUIProps } from "./ProductDetail.types";
+import DOMPurify from "dompurify";
+import KaKaoMapPage from "../../../../commons/map";
 
 export default function ProductDetailUI(props: IProductDetailUIProps) {
   return (
@@ -29,13 +31,32 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
                 />
               ))}
           </S.ImageWrapper>
-          <S.Contents>{props.data?.fetchUseditem?.contents}</S.Contents>
+          <S.Contents>
+            {typeof window !== "undefined" && (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(
+                    props.data?.fetchUseditem?.contents
+                  ),
+                }}
+              ></div>
+            )}
+          </S.Contents>
+          {/* 
+          {props.data?.fetchUseditem?.useditemAddress ? (
+            // <KaKaoMapPage
+            //   address1={props.data?.fetchUseditem.useditemAddress}
+            //   // mapfixed={true}
+            // />
+          ) : (
+            ""
+          )} */}
+          {/* <KaKaoMapPage address1={props.data?.fetchUseditem} /> */}
         </S.Body>
       </S.CardWrapper>
       <S.BottomWrapper>
         <S.Button onClick={props.onClickMoveList}>목록으로</S.Button>
-        <S.Button onClick={props.onClickMoveEdit}>수정하기</S.Button>
-        <S.Button>삭제하기</S.Button>
+        <S.Button onClick={props.onClickMoveBuy}>구매하기</S.Button>
       </S.BottomWrapper>
       {/* 댓글 */}
     </S.Wrapper> //전체 박스

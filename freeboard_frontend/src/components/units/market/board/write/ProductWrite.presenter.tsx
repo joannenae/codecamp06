@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import Upload from "../../../../commons/upload/Upload.container";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
+import KaKaoMapPage from "../../../../commons/map";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -14,16 +15,14 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
       <S.WrIn>
         <S.Header>{props.isEdit ? "상품 수정" : "상품 등록"}</S.Header>
         <S.TopBox>
-          <S.BoxIn>
-            <S.Text>상품명</S.Text>
-            <S.Name
-              type="text"
-              onChange={props.onChangeName}
-              defaultValue={props.data?.fetchUseditem.name} // 수정하기 전에 기본으로 써져있을 값 -> 등록할 때 썼던 데이터가 그대로 남아있어야댐
-              placeholder="상품명을 입력해 주세요"
-            />
-            <S.Error>{props.nameError}</S.Error>
-          </S.BoxIn>
+          <S.Text>상품명</S.Text>
+          <S.Name
+            type="text"
+            onChange={props.onChangeName}
+            defaultValue={props.data?.fetchUseditem.name} // 수정하기 전에 기본으로 써져있을 값 -> 등록할 때 썼던 데이터가 그대로 남아있어야댐
+            placeholder="상품명을 입력해 주세요"
+          />
+          <S.Error>{props.nameError}</S.Error>
         </S.TopBox>
         <S.Title>
           <S.Text>한 줄 요약</S.Text>
@@ -66,7 +65,33 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
           </S.TitleTag>
         </S.Flexbox>
         <S.BoxIn>
-          <S.Text>거래 위치</S.Text>
+          <S.Map>
+            <S.Text>거래 위치</S.Text>
+            <KaKaoMapPage />
+          </S.Map>
+          <S.AddressBox>
+            <S.Location>
+              <S.Text>GPS</S.Text>
+              <S.InputText
+                id="lng"
+                onChange={props.onChangeAddress}
+                readOnly
+                // value={props.isAddress?.lng}
+              />
+              {/* <S.LocationIcon src="/location.png" alt="" /> */}
+              <S.InputText
+                id="lat"
+                onChange={props.onChangeAddress}
+                readOnly
+                // value={props.isAddress?.lat}
+              />
+            </S.Location>
+            <S.Address>
+              <S.Text>주소</S.Text>
+              <S.InputAddress type="text" />
+              <S.InputText type="text" />
+            </S.Address>
+          </S.AddressBox>
         </S.BoxIn>
         <S.Text>사진첨부</S.Text>
         {props.fileUrls?.map((el, index) => (

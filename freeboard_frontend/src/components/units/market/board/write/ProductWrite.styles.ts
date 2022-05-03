@@ -3,7 +3,7 @@ import { ISubmitButtonProps } from "./ProductWrite.types";
 
 export const Wr = styled.div`
   width: 1200px;
-  box-shadow: 5px 5px 5px 5px lightgray;
+  /* box-shadow: 5px 5px 5px 5px lightgray; */
   margin: 40px auto;
   /* height: 100%; */
 `;
@@ -21,7 +21,12 @@ export const Header = styled.div`
 export const TopBox = styled.div`
   margin-top: 20px;
 `;
-export const BoxIn = styled.div``;
+export const BoxIn = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+export const Map = styled.div``;
 export const Text = styled.p`
   color: black;
   font-weight: bold;
@@ -37,6 +42,25 @@ export const Name = styled.input`
   height: 30px;
   border-radius: 5px;
   border: 1px solid lightgray;
+`;
+export const AddressBox = styled.div`
+  margin-left: 50px;
+  margin-top: 50px; ;
+`;
+export const Location = styled.div``;
+export const InputText = styled.input`
+  border: none;
+  border: 1px solid lightgray;
+`;
+export const LocationIcon = styled.img``;
+export const Address = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export const InputAddress = styled.input`
+  border: none;
+  border: 1px solid lightgray;
+  margin-bottom: 20px;
 `;
 export const Online = styled.input`
   width: 100%;

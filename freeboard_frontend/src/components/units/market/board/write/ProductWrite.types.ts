@@ -25,13 +25,16 @@ export interface IProductWriteUIProps {
 
   onChangeName: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeRemark: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeContent: () => string;
+  onChangeContent: any;
+  onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangePrice: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeTag: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeFileUrls: (fileUrls: string, index: number) => void;
 
   onClickSignUp: () => void;
   onClickUpdate: () => void;
+
+  // isAddress: string;
 }
 export interface ISubmitButtonProps {
   isActive: boolean;

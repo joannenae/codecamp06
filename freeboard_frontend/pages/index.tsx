@@ -15,9 +15,10 @@ const My = styled.div`
   font-weight: 300;
   position: absolute;
 `;
-const MyPage = styled.span`
+const MyPage = styled.div`
   margin-right: 30px;
   cursor: pointer;
+  z-index: 2;
 `;
 const LogIn = styled.div`
   padding: 30px;
@@ -80,14 +81,17 @@ export default function Home() {
     console.log("여기");
   };
   const onClickMove = () => {
-    router.push("/boards");
+    router.push("/market");
+  };
+  const onClickMyPage = () => {
+    router.push("/mypage");
   };
 
   return (
     <>
       <Wrapper>
         <My>
-          <MyPage>마이페이지</MyPage>
+          <MyPage onClick={onClickMyPage}>마이페이지</MyPage>
           <LogIn onClick={onClickLog}>로그인</LogIn>
         </My>
         <DivBox>
