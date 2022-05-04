@@ -38,7 +38,7 @@ export const getServerSideProps = async (context) => {
     "https://backend06.codebootcamp.co.kr/graphql",
     FETCH_BOARD,
     {
-      boardid: context.query.boardid,
+      boardId: context.query.boardid,
     }
   );
 
