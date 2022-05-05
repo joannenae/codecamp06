@@ -3,64 +3,90 @@ import { ISubmitButtonProps } from "./ProductWrite.types";
 
 export const Wr = styled.div`
   width: 1200px;
-  /* box-shadow: 5px 5px 5px 5px lightgray; */
   margin: 40px auto;
-  /* height: 100%; */
 `;
 export const WrIn = styled.div`
   width: 85%;
   margin: 0 auto;
+  border-bottom: 1px solid black;
 `;
 export const Header = styled.div`
   color: black;
-  text-align: center;
+  text-align: start;
   font-weight: bold;
-  padding: 30px;
-  font-size: 20px;
+  padding: 40px 30px 30px 0px;
+  font-size: 30px;
+  border-bottom: 1px solid black;
 `;
 export const TopBox = styled.div`
+  display: flex;
   margin-top: 20px;
+  align-items: center;
 `;
 export const BoxIn = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
+  margin-top: 50px;
 `;
-export const Map = styled.div``;
-export const Text = styled.p`
+export const Map = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export const Text = styled.div`
+  width: 100px;
   color: black;
   font-weight: bold;
   font-size: 11px;
-  margin-top: 25px;
+  margin-top: 10px;
 `;
 export const Title = styled.div`
-  margin-top: 30px;
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
 `;
 export const Name = styled.input`
   width: 100%;
   font-size: 11px;
   height: 30px;
   border-radius: 5px;
-  border: 1px solid lightgray;
+  border: none;
+  background-color: #e9e9e9;
 `;
 export const AddressBox = styled.div`
   margin-left: 50px;
   margin-top: 50px; ;
 `;
 export const Location = styled.div``;
-export const InputText = styled.input`
-  border: none;
-  border: 1px solid lightgray;
-`;
 export const LocationIcon = styled.img``;
-export const Address = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-export const InputAddress = styled.input`
-  border: none;
+export const Address = styled.input`
   border: 1px solid lightgray;
-  margin-bottom: 20px;
+  width: 80px;
+  height: 50px;
+`;
+export const Search = styled.button`
+  width: 130px;
+  height: 50px;
+  display: inline-block;
+  background-color: black;
+  color: white;
+  border: none;
+  font-size: 11px;
+  margin-left: 20px;
+  border: 1px solid lightgray;
+`;
+export const Writer = styled.input`
+  width: 550px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  height: 30px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
 `;
 export const Online = styled.input`
   width: 100%;
@@ -72,28 +98,30 @@ export const Online = styled.input`
   height: 30px;
   margin-top: 5px;
   border-radius: 5px;
-  border: 1px solid lightgray;
-`;
-export const Flexbox = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
+  border: none;
+  background-color: #e9e9e9;
 `;
 export const TitlePrice = styled.div`
-  width: 500px;
+  display: flex;
+  margin-top: 70px;
+  align-items: center;
 `;
 export const TitleTag = styled.div`
-  width: 500px;
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
 `;
 export const Price = styled.input`
   width: 100%;
   border-radius: 5px;
-  border: 1px solid lightgray;
+  border: none;
+  background-color: #e9e9e9;
 `;
 export const Tag = styled.input`
   width: 100%;
   border-radius: 5px;
-  border: 1px solid lightgray;
+  border: none;
+  background-color: #e9e9e9;
 `;
 export const Content = styled.input`
   width: 100%;
@@ -147,13 +175,23 @@ export const SignUp = styled.div`
   text-align: center;
   line-height: 30px;
 `;
+export const Delete = styled.div`
+  width: 130px;
+  background-color: #ffe004;
+  margin-right: 30px;
+  height: 30px;
+  border-radius: 5px;
+  color: black;
+  margin-top: 100px;
+`;
 export const Cancel = styled.div`
   width: 130px;
-  background-color: gray;
+  background-color: black;
   margin-right: 30px;
   height: 30px;
   border-radius: 5px;
   color: white;
+  margin-top: 100px;
 
   background-color: ${(props: ISubmitButtonProps) =>
     props.isActive ? "#ffd600" : "none"};

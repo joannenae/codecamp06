@@ -11,6 +11,7 @@ export default function ProductListUI(props: IProductListUIProps) {
         <S.Button>
           <S.B onClick={props.onClickSell}>판매중상품</S.B>
           <S.B onClick={props.onClickSold}>판매된상품</S.B>
+          <S.B onClick={props.onClickSubmit}>상품등록하기</S.B>
         </S.Button>
         <InfiniteScroll
           style={{ width: "100%" }}
@@ -27,23 +28,7 @@ export default function ProductListUI(props: IProductListUIProps) {
             />
           )) || <div></div>}
         </InfiniteScroll>
-        <S.Submit onClick={props.onClickSubmit}>상품등록하기</S.Submit>
       </S.WrBox>
-
-      {/* <S.TodayWrapper>
-        <S.TodayRow>
-          <S.TodayCol>작성자</S.TodayCol>
-          <S.TodayCol>제목</S.TodayCol>
-          <S.TodayCol>내용</S.TodayCol>
-        </S.TodayRow>
-        {basketitems.map((el) => (
-          <S.TodayRow key={el._id}>
-            <S.TodayCol>{el.name}</S.TodayCol>
-            <S.TodayCol>{el.title}</S.TodayCol>
-            <S.TodayCol>{el.contents}</S.TodayCol>
-          </S.TodayRow>
-        ))}
-      </S.TodayWrapper> */}
     </S.Wr>
   );
 }

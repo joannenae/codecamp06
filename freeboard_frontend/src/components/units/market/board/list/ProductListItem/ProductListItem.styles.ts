@@ -16,6 +16,7 @@ export const ItemImage = styled.img`
 export const Col = styled.div`
   /* margin-top: 10px; */
   width: 500px;
+  margin-left: 100px;
 `;
 export const Coll = styled.div`
   /* margin-top: 10px; */

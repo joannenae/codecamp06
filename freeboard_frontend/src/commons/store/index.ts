@@ -1,4 +1,5 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
+import { getAccessToken } from "../libraries/getAccessToken";
 
 // 글로벌 스테이트
 export const isEditState = atom({
@@ -20,4 +21,16 @@ export const userInfoState = atom({
 export const visitedPageState = atom({
   key: "visitedPageState",
   default: "/",
+});
+export const isLoadedState = atom({
+  key: "isLoadedState",
+  default: true,
+});
+
+export const restoreAccessTokenLoadable = selector({
+  key: "restoreAccessTokenLoadable",
+  get: async () => {
+    const newAccessToken = await getAccessToken();
+    return newAccessToken;
+  },
 });

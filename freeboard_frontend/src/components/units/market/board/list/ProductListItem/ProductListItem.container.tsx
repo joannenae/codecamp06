@@ -40,9 +40,9 @@ export default function ProductListItem(props) {
     router.push(`/market/${el._id}`);
   };
 
-  useEffect(() => {
-    // console.log(props.basketItems);
-  }, [props.basketItems]);
+  // useEffect(() => {
+  //   // console.log(props.basketItems);
+  // }, [props.basketItems]);
 
   return (
     <>

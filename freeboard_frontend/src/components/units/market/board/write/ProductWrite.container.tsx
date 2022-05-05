@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
-import { accessTokenState } from "../../../../../../src/commons/store";
+import { accessTokenState } from "../../../../../commons/store";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -9,38 +9,31 @@ import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "./ProductWrite.queries";
 import { IProductWriteProps, IUpdateUseditemInput } from "./ProductWrite.types";
 
 export default function ProductWrite(props: IProductWriteProps) {
+  console.log(props.data);
   const [, setAccessToken] = useRecoilState(accessTokenState);
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
   const [updateUsedItem] = useMutation(UPDATE_USED_ITEM);
 
-  // const [isAddress, setIsAddress] = useState({
-  //   zipcode: "",
-  //   address: "",
-  //   addressDetail: "",
-  //   lat: 0,
-  //   lng: 0,
-  // });
+  const [isOpen, setIsOpen] = useState(false);
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+
   const [name, setName] = useState("");
   const [remarks, setRemarks] = useState("");
   const [contents, setContents] = useState("");
   const [price, setPrice] = useState(0);
   const [tags, setTags] = useState("");
 
+  const [hashArr, setHashArr] = useState(
+    props?.data?.fetchUseditem?.tags || []
+  );
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
-
-  const [nameError, setNameError] = useState("");
-  const [remarkError, setRemarkError] = useState("");
-  const [contentError, setContentError] = useState("");
-  const [priceError, setPriceError] = useState("");
-  const [tagError, setTagError] = useState("");
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
-    if (event.target.value !== "") {
-      setNameError("");
-    }
     if (event.target.value && remarks && contents && price && tags) {
       setIsActive(true);
     } else {
@@ -49,9 +42,6 @@ export default function ProductWrite(props: IProductWriteProps) {
   };
   const onChangeRemark = (event: ChangeEvent<HTMLInputElement>) => {
     setRemarks(event.target.value);
-    if (event.target.value !== "") {
-      setRemarkError("");
-    }
     if (name && event.target.value && contents && price && tags) {
       setIsActive(true);
     } else {
@@ -61,9 +51,7 @@ export default function ProductWrite(props: IProductWriteProps) {
   const onChangeContent = (value: string) => {
     console.log(value);
     setContents(value === "<p><br></p>" ? "" : value);
-    if (value !== "") {
-      setContentError("");
-    }
+
     if (name && remarks && value && price && tags) {
       setIsActive(true);
     } else {
@@ -72,21 +60,8 @@ export default function ProductWrite(props: IProductWriteProps) {
   };
   const onChangePrice = (event: ChangeEvent<HTMLInputElement>) => {
     setPrice(Number(event.target.value));
-    if (event.target.value !== "") {
-      setPriceError("");
-    }
+
     if (name && remarks && contents && event.target.value && tags) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-  const onChangeTag = (event: ChangeEvent<HTMLInputElement>) => {
-    setTags(event.target.value);
-    if (event.target.value !== "") {
-      setTagError("");
-    }
-    if (name && remarks && contents && price && event.target.value) {
       setIsActive(true);
     } else {
       setIsActive(false);
@@ -98,31 +73,21 @@ export default function ProductWrite(props: IProductWriteProps) {
     newFileUrls[index] = fileUrl;
     setFileUrls(newFileUrls);
   };
-  // const onChangeAddress = (
-  //   event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  // ) => {
-  //   setIsAddress({
-  //     ...isAddress,
-  //     [event.target.id]: event.target.value,
-  //   });
-  // };
+
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
+  const onClickAddressSearch = () => {
+    setIsOpen(true);
+  };
+
+  const onCompleteAddressSearch = (data: any) => {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen(false);
+  };
 
   const onClickSignUp = async () => {
-    if (name === "") {
-      setNameError("상품명을 입력해주세요.");
-    }
-    if (remarks === "") {
-      setRemarkError("간단히 한 줄로 소개해주세요.");
-    }
-    if (contents === "") {
-      setContentError("내용을 입력해주세요.");
-    }
-    if (price === 0) {
-      setPriceError("가격을 입력해주세요.");
-    }
-    if (tags === "") {
-      setTagError("태그를 추가해주세요");
-    }
     if (
       name !== "" &&
       remarks !== "" &&
@@ -140,18 +105,40 @@ export default function ProductWrite(props: IProductWriteProps) {
               remarks: remarks,
               contents: contents,
               price,
-              tags,
+              tags: hashArr,
               images: fileUrls,
+              useditemAddress: {
+                zipcode,
+                address,
+                addressDetail,
+              },
             },
           },
         });
         Modal.success({ content: "상품이 등록되었습니다." });
         console.log(result);
-        router.push(`/market/${result.data.createUseditem._id}`);
+        router.push(`/product/${result.data.createUseditem._id}`);
       } catch (error) {
-        Modal.error({ content: error.message });
+        Modal.error({ content: "상품 등록에 실패하였습니다." });
       }
     }
+  };
+  const showModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsOpen(false);
+  };
+  const handleComplete = (data: any) => {
+    setIsOpen(false);
+    console.log(data.address);
+    setAddress(data.address);
+    setZipcode(data.zonecode);
   };
 
   const onClickUpdate = async () => {
@@ -174,14 +161,14 @@ export default function ProductWrite(props: IProductWriteProps) {
             contents,
             remarks,
             price,
-            tags,
+            tags: hashArr,
             // images: fileUrls,
             // 위 검증이 맞다면 이 내용들을 수정해줘 - playground
           },
         },
       });
       Modal.success({ content: "상품 수정에 성공하였습니다!" });
-      router.push(`/market/${router.query.marketid}`);
+      router.push(`/product/${router.query.marketid}`);
     } catch (error) {
       Modal.error({ content: error.message });
     }
@@ -192,6 +179,14 @@ export default function ProductWrite(props: IProductWriteProps) {
       setFileUrls([...props.data?.fetchUseditem.images]);
     }
   }, [props.data]);
+  // 수정화면에 기존 해시태그 불러오기
+  useEffect(() => {
+    setHashArr(props?.data?.fetchUseditem?.tags || []);
+  }, [props?.data?.fetchUseditem?.tags]);
+
+  const onClickLog = () => {
+    router.push("/login");
+  };
 
   return (
     <>
@@ -199,23 +194,28 @@ export default function ProductWrite(props: IProductWriteProps) {
         isActive={isActive}
         isEdit={props.isEdit}
         data={props.data}
-        nameError={nameError}
-        remarkError={remarkError}
-        contentError={contentError}
-        priceError={priceError}
-        tagError={tagError}
         onChangeName={onChangeName}
         onChangeRemark={onChangeRemark}
         onChangeContent={onChangeContent}
         onChangePrice={onChangePrice}
-        onChangeTag={onChangeTag}
         onChangeFileUrls={onChangeFileUrls}
         onClickSignUp={onClickSignUp}
         onClickUpdate={onClickUpdate}
         fileUrls={fileUrls}
-        // isAddress={isAddress}
-        // setIsAddress={setIsAddress}
-        // onChangeAddress={onChangeAddress}
+        onChangeAddressDetail={onChangeAddressDetail}
+        onClickAddressSearch={onClickAddressSearch}
+        onCompleteAddressSearch={onCompleteAddressSearch}
+        isOpen={isOpen}
+        showModal={showModal}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+        handleComplete={handleComplete}
+        address={address}
+        zipcode={zipcode}
+        addressDetail={addressDetail}
+        hashArr={hashArr}
+        setHashArr={setHashArr}
+        onClickLog={onClickLog}
       />
     </>
   );

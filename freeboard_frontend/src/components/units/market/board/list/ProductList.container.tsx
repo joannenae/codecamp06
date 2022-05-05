@@ -2,9 +2,9 @@ import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ProductListUI from "./ProductList.presenter";
-import { FETCH_PRODUCTS } from "./ProductList.queries";
+import { FETCH_PRODUCTS, FETCH_USER_LOGGED_IN } from "./ProductList.queries";
 
-export default function ProductList() {
+export default function ProductList(props) {
   // useeffct로 로컬스토리지에 넣을때 이게 맞는지 확인하고
   // useEffect(() => {
   //   const baskets = JSON.parse(localStorage.getItem("today") || "[]");
@@ -13,30 +13,45 @@ export default function ProductList() {
 
   const router = useRouter();
 
+  const { data: userData } = useQuery(FETCH_USER_LOGGED_IN);
+
   const [basketItems, setBasketItems] = useState([]);
+  const [isLength, setIsLength] = useState(0);
 
   const [keyword, setKeyword] = useState("");
   const [isSoldout, setIsSoldout] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   const { data, fetchMore } = useQuery(FETCH_PRODUCTS, {
     variables: {
       isSoldout,
     },
   });
 
-  function onChangeKeyword(value: string) {
-    setKeyword(value);
-  }
-
-  const onClickSubmit = () => {
-    router.push("/market/new");
-  };
-
   const onClickSold = () => {
     setIsSoldout(true);
   };
 
+  // 판매된 상품 탭 클릭
   const onClickSell = () => {
     setIsSoldout(false);
+  };
+
+  function onChangeKeyword(value: string) {
+    setKeyword(value);
+  }
+  const onClickLog = () => {
+    router.push(`/login`);
+  };
+  const onToggleModal = () => {
+    setIsOpen((prev) => !prev);
+  };
+  const onClickSubmit = () => {
+    router.push("/market/new");
+  };
+
+  const onClickMoney = () => {
+    setIsOpen((prev) => !prev); // 종료
   };
 
   const onLoadMore = () => {
@@ -57,19 +72,30 @@ export default function ProductList() {
     });
   };
 
+  useEffect(() => {
+    const ddd = localStorage.getItem("basketLength");
+    setIsLength(ddd);
+  }, []);
+
   return (
     <>
       <ProductListUI
         data={data}
         onLoadMore={onLoadMore}
         onClickSubmit={onClickSubmit}
-        onClickSold={onClickSold}
-        isSoldout={isSoldout}
-        onClickSell={onClickSell}
         keyword={keyword}
         onChangeKeyword={onChangeKeyword}
         setBasketItems={setBasketItems}
         basketItems={basketItems}
+        onClickLog={onClickLog}
+        onClickMoney={onClickMoney}
+        isOpen={isOpen}
+        onToggleModal={onToggleModal}
+        isLength={isLength}
+        setIsLength={setIsLength}
+        userData={userData}
+        onClickSell={onClickSell}
+        onClickSold={onClickSold}
       />
     </>
   );

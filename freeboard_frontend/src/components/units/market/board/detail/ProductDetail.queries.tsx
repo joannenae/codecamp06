@@ -8,8 +8,14 @@ export const FETCH_USED_ITEM = gql`
       remarks
       contents
       price
-      images
       createdAt
+      images
+      tags
+      pickedCount
+      seller {
+        _id
+        name
+      }
       useditemAddress {
         lat
         lng
@@ -18,5 +24,21 @@ export const FETCH_USED_ITEM = gql`
         addressDetail
       }
     }
+  }
+`;
+
+export const BUY_PRODUCT = gql`
+  mutation createPointTransactionOfBuyingAndSelling($useritemId: ID!) {
+    createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
+      _id
+      name
+      price
+    }
+  }
+`;
+
+export const PICK_TOGLE = gql`
+  mutation toggleUseditemPick($useditemId: ID!) {
+    toggleUseditemPick(useditemId: $useditemId)
   }
 `;

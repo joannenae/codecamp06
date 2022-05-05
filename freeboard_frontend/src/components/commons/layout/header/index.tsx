@@ -35,11 +35,14 @@ export default function LayoutHeader() {
   const onClickMove = () => {
     router.push("/");
   };
+  const onClickLogin = () => {
+    router.push(`/login`);
+  };
   return (
     <>
       <Logo>
         <LogoImg src="/tamburins.jpg" alt="" onClick={onClickMove} />
-        <Profile>
+        <Profile onClick={onClickLogin}>
           <ProfileImg src="/charic.png" />
           <Poly src="/Polygon 1.png" />
         </Profile>

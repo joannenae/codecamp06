@@ -90,7 +90,7 @@ export default function LogInPage() {
         });
         const accessToken = result.data.loginUser.accessToken;
         setAccessToken(accessToken);
-        localStorage.setItem("accessToken", accessToken);
+        // localStorage.setItem("accessToken", accessToken);
         alert("로그인에 성공하였습니다.");
         router.push("/");
       } catch (error) {
