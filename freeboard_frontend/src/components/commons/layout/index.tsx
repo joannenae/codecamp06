@@ -14,7 +14,6 @@ const BodyWrapper = styled.div`
 
 const Body = styled.div`
   margin-left: 20px;
-  margin: 50px 350px auto;
   height: auto;
   /* width: 1920px; */
 `;

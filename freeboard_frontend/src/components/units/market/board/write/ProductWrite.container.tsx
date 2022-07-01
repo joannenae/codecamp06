@@ -9,7 +9,6 @@ import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "./ProductWrite.queries";
 import { IProductWriteProps, IUpdateUseditemInput } from "./ProductWrite.types";
 
 export default function ProductWrite(props: IProductWriteProps) {
-  console.log(props.data);
   const [, setAccessToken] = useRecoilState(accessTokenState);
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
@@ -117,7 +116,7 @@ export default function ProductWrite(props: IProductWriteProps) {
         });
         Modal.success({ content: "상품이 등록되었습니다." });
         console.log(result);
-        router.push(`/product/${result.data.createUseditem._id}`);
+        router.push(`/market/${result.data.createUseditem._id}`);
       } catch (error) {
         Modal.error({ content: "상품 등록에 실패하였습니다." });
       }
@@ -168,7 +167,7 @@ export default function ProductWrite(props: IProductWriteProps) {
         },
       });
       Modal.success({ content: "상품 수정에 성공하였습니다!" });
-      router.push(`/product/${router.query.marketid}`);
+      router.push(`/market/${router.query.marketid}`);
     } catch (error) {
       Modal.error({ content: error.message });
     }

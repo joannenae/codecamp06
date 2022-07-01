@@ -74,12 +74,11 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
           <S.BoxIn>
             <S.Map>
               <S.Text style={{ marginBottom: 20 }}>거래 위치</S.Text>
-              <KaKaoMapPage address={props.address} />
+              {props.address && <KaKaoMapPage address={props.address} />}
             </S.Map>
             <S.AddressBox>
               <S.Address
                 placeholder="07250"
-                readOnly
                 defaultValue={
                   props.zipcode ||
                   props.data?.fetchUseditem.useditemAddress?.zipcode ||
@@ -88,6 +87,7 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
               ></S.Address>
               <S.Search onClick={props.showModal}>우편번호 검색</S.Search>
               <S.Writer
+                readOnly
                 value={
                   props.address ||
                   props.data?.fetchUseditem.useditemAddress?.address ||

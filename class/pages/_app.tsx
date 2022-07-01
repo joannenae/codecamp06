@@ -39,9 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <RecoilRoot>
         <ApolloSetting>
           <Global styles={globalStyles} />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Component {...pageProps} />
         </ApolloSetting>
       </RecoilRoot>
     </div>

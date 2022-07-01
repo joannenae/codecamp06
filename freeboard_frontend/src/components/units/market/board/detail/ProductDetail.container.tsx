@@ -45,13 +45,13 @@ function ProductDetail(props) {
   >(PICK_TOGLE);
 
   const onClickMoveList = () => {
-    router.push(`/product`);
+    router.push(`/market`);
   };
   const onClickMoveBuy = () => {
     // router.push(`/market/${router.query.marketid}/edit`);
   };
   const onClickMoveToBoardEdit = () => {
-    router.push(`/product/${router.query.marketid}/edit`); //폴더명
+    router.push(`/market/${router.query.marketid}/edit`); //폴더명
   };
   const onClickMoney = () => {
     setIsOpen((prev) => !prev); // 종료

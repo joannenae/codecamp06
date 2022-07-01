@@ -16,6 +16,7 @@ export default function KaKaoMapPage(props) {
     script.onload = () => {
       window.kakao.maps.load(function () {
         const mapContainer = document.getElementById("map"), // 지도를 표시할 div
+          // if(props.)
           mapOption = {
             center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
             level: 3, // 지도의 확대 레벨
@@ -55,7 +56,7 @@ export default function KaKaoMapPage(props) {
         });
       });
     };
-  });
+  }, [props.address]); // 의존성 배열
 
   return (
     <div>
