@@ -43,7 +43,7 @@ export default function MapBoardPage() {
 
   return (
     <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
-      {data?.fetchBoards.map((el) => (
+      {data?.fetchBoards.map((el: any) => (
         <MyRow key={el._id}>
           <MyColumn>{el._id}</MyColumn>
           <MyColumn>{el.writer}</MyColumn>
