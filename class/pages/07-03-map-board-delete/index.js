@@ -53,6 +53,7 @@ export default function MapBoardPage() {
               삭제
             </button>
           </Column>
+          asd
         </Row>
       ))}
     </>
